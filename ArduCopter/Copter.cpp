@@ -31,6 +31,10 @@ Copter::Copter(void) :
     control_mode(STABILIZE),
 #if FRAME_CONFIG == HELI_FRAME  // helicopter constructor requires more arguments
     motors(g.rc_7, g.heli_servo_rsc, g.heli_servo_1, g.heli_servo_2, g.heli_servo_3, g.heli_servo_4, MAIN_LOOP_RATE),
+#elif FRAME_CONFIG == HELI_DUAL_FRAME  // dual helicopter constructor requires more arguments
+    motors(g.heli_servo_rsc, g.heli_servo_1, g.heli_servo_2, g.heli_servo_3, g.heli_servo_4, g.heli_servo_5, g.heli_servo_6, MAIN_LOOP_RATE),
+#elif FRAME_CONFIG == HELI_COMPOUND_FRAME  // compound helicopter constructor requires more arguments
+    motors(g.rc_6, g.rc_7, g.heli_servo_rsc, g.heli_servo_1, g.heli_servo_2, g.heli_servo_3, g.heli_servo_4, g.heli_servo_5, MAIN_LOOP_RATE),
 #elif FRAME_CONFIG == TRI_FRAME  // tri constructor requires additional rc_7 argument to allow tail servo reversing
     motors(MAIN_LOOP_RATE),
 #elif FRAME_CONFIG == SINGLE_FRAME  // single constructor requires extra servos for flaps
@@ -117,7 +121,7 @@ Copter::Copter(void) :
 #if PRECISION_LANDING == ENABLED
     precland(ahrs, inertial_nav, g.pi_precland, MAIN_LOOP_SECONDS),
 #endif
-#if FRAME_CONFIG == HELI_FRAME
+#if FRAME_CONFIG == HELI_FRAME || FRAME_CONFIG == HELI_DUAL_FRAME || FRAME_CONFIG == HELI_COMPOUND_FRAME
     // ToDo: Input Manager is only used by Heli for 3.3, but will be used by all frames for 3.4
     input_manager(MAIN_LOOP_RATE),
 #endif

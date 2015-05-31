@@ -114,7 +114,7 @@ const AP_Scheduler::Task Copter::scheduler_tasks[] = {
 #if PRECISION_LANDING == ENABLED
     SCHED_TASK(update_precland,       50,     50),
 #endif
-#if FRAME_CONFIG == HELI_FRAME
+#if FRAME_CONFIG == HELI_FRAME || FRAME_CONFIG == HELI_DUAL_FRAME || FRAME_CONFIG == HELI_COMPOUND_FRAME
     SCHED_TASK(check_dynamic_flight,  50,     75),
 #endif
     SCHED_TASK(update_notify,         50,     90),
@@ -260,9 +260,9 @@ void Copter::fast_loop()
     // run low level rate controllers that only require IMU data
     attitude_control.rate_controller_run();
     
-#if FRAME_CONFIG == HELI_FRAME
+#if FRAME_CONFIG == HELI_FRAME || FRAME_CONFIG == HELI_DUAL_FRAME || FRAME_CONFIG == HELI_COMPOUND_FRAME
     update_heli_control_dynamics();
-#endif //HELI_FRAME
+#endif
 
     // send outputs to the motors library
     motors_output();
@@ -312,7 +312,7 @@ void Copter::throttle_loop()
     // check auto_armed status
     update_auto_armed();
 
-#if FRAME_CONFIG == HELI_FRAME
+#if FRAME_CONFIG == HELI_FRAME || FRAME_CONFIG == HELI_DUAL_FRAME || FRAME_CONFIG == HELI_COMPOUND_FRAME
     // update rotor speed
     heli_update_rotor_speed_targets();
 
@@ -390,7 +390,8 @@ void Copter::ten_hz_logging_loop()
     if (should_log(MASK_LOG_IMU) || should_log(MASK_LOG_IMU_FAST) || should_log(MASK_LOG_IMU_RAW)) {
         DataFlash.Log_Write_Vibration(ins);
     }
-#if FRAME_CONFIG == HELI_FRAME
+
+#if FRAME_CONFIG == HELI_FRAME || FRAME_CONFIG == HELI_DUAL_FRAME || FRAME_CONFIG == HELI_COMPOUND_FRAME
     Log_Write_Heli();
 #endif
 }
@@ -476,7 +477,7 @@ void Copter::one_hz_loop()
 
         update_using_interlock();
 
-#if FRAME_CONFIG != HELI_FRAME
+#if FRAME_CONFIG != HELI_FRAME && FRAME_CONFIG != HELI_DUAL_FRAME && FRAME_CONFIG != HELI_COMPOUND_FRAME
         // check the user hasn't updated the frame orientation
         motors.set_frame_orientation(g.frame_orientation);
 

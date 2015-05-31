@@ -2,7 +2,7 @@
 
 #include "Copter.h"
 
-#if FRAME_CONFIG == HELI_FRAME
+#if FRAME_CONFIG == HELI_FRAME || FRAME_CONFIG == HELI_DUAL_FRAME || FRAME_CONFIG == HELI_COMPOUND_FRAME
 /*
  * heli_control_acro.pde - init and run calls for acro flight mode for trad heli
  */
@@ -13,8 +13,10 @@ bool Copter::heli_acro_init(bool ignore_checks)
     // if heli is equipped with a flybar, then tell the attitude controller to pass through controls directly to servos
     attitude_control.use_flybar_passthrough(motors.has_flybar(), motors.supports_yaw_passthrough());
 
+#if FRAME_CONFIG == HELI_FRAME || FRAME_CONFIG == HELI_COMPOUND_FRAME 
     motors.set_acro_tail(true);
-    
+#endif
+
     // set stab collective false to use full collective pitch range
     input_manager.set_use_stab_col(false);
 
@@ -95,4 +97,4 @@ void Copter::heli_acro_run()
     attitude_control.set_throttle_out(pilot_throttle_scaled, false, g.throttle_filt);
 }
 
-#endif  //HELI_FRAME
+#endif // FRAME_CONFIG == HELI_FRAME || FRAME_CONFIG == HELI_DUAL_FRAME || FRAME_CONFIG == HELI_COMPOUND_FRAME
