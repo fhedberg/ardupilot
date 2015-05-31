@@ -9,7 +9,7 @@
 // setup_compassmot - sets compass's motor interference parameters
 uint8_t Copter::mavlink_compassmot(mavlink_channel_t chan)
 {
-#if FRAME_CONFIG == HELI_FRAME
+#if FRAME_CONFIG == HELI_FRAME || FRAME_CONFIG == HELI_DUAL_FRAME || FRAME_CONFIG == HELI_COMPOUND_FRAME
     // compassmot not implemented for tradheli
     return 1;
 #else
@@ -269,6 +269,6 @@ uint8_t Copter::mavlink_compassmot(mavlink_channel_t chan)
     ap.compass_mot = false;
 
     return 0;
-#endif  // FRAME_CONFIG != HELI_FRAME
+#endif  // FRAME_CONFIG == HELI_FRAME || FRAME_CONFIG == HELI_DUAL_FRAME || FRAME_CONFIG == HELI_COMPOUND_FRAME
 }
 
