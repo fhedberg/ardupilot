@@ -128,7 +128,7 @@ public:
 protected:
 
     // init_outputs - initialise Servo/PWM ranges and endpoints
-    void init_outputs();
+    virtual void init_outputs();
 
     // update_motor_controls - sends commands to motor controllers
     void update_motor_control(uint8_t state);
