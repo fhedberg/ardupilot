@@ -136,7 +136,7 @@ public:
 protected:
 
     // init_outputs - initialise Servo/PWM ranges and endpoints
-    void init_outputs();
+    virtual void init_outputs();
 
     // update_motor_controls - sends commands to motor controllers
     void update_motor_control(RotorControlState state);
@@ -148,7 +148,7 @@ protected:
     void move_actuators(int16_t roll_out, int16_t pitch_out, int16_t coll_in, int16_t yaw_out);
 
     // move_yaw - moves the yaw servo
-    void move_yaw(int16_t yaw_out);
+    virtual void move_yaw(int16_t yaw_out);
 
     // write_aux - outputs pwm onto output aux channel (ch7). servo_out parameter is of the range 0 ~ 1000
     void write_aux(int16_t servo_out);
