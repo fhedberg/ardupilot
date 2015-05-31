@@ -77,13 +77,13 @@ void Copter::loiter_run()
     case Loiter_Disarmed:
 
         wp_nav.init_loiter_target();
-#if FRAME_CONFIG == HELI_FRAME  // Helicopters always stabilize roll/pitch/yaw
+#if FRAME_CONFIG == HELI_FRAME || FRAME_CONFIG == HELI_DUAL_FRAME || FRAME_CONFIG == HELI_COMPOUND_FRAME // Helicopters always stabilize roll/pitch/yaw
         // call attitude controller
         attitude_control.angle_ef_roll_pitch_rate_ef_yaw_smooth(0, 0, 0, get_smoothing_gain());
         attitude_control.set_throttle_out(0,false,g.throttle_filt);
 #else   // multicopters do not stabilize roll/pitch/yaw when disarmed
         attitude_control.set_throttle_out_unstabilized(0,true,g.throttle_filt);
-#endif  // HELI_FRAME
+#endif
         pos_control.relax_alt_hold_controllers(get_throttle_pre_takeoff(channel_throttle->control_in)-throttle_average);
         break;
 
@@ -115,7 +115,7 @@ void Copter::loiter_run()
     case Loiter_Landed:
 
         wp_nav.init_loiter_target();
-#if FRAME_CONFIG == HELI_FRAME  // Helicopters always stabilize roll/pitch/yaw
+#if FRAME_CONFIG == HELI_FRAME || FRAME_CONFIG == HELI_DUAL_FRAME || FRAME_CONFIG == HELI_COMPOUND_FRAME // Helicopters always stabilize roll/pitch/yaw
         // call attitude controller
         attitude_control.angle_ef_roll_pitch_rate_ef_yaw_smooth(0, 0, 0, get_smoothing_gain());
         attitude_control.set_throttle_out(get_throttle_pre_takeoff(channel_throttle->control_in),false,g.throttle_filt);

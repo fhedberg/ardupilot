@@ -425,7 +425,7 @@ struct PACKED log_MotBatt {
 // Write an rate packet
 void Copter::Log_Write_MotBatt()
 {
-#if FRAME_CONFIG != HELI_FRAME
+#if FRAME_CONFIG != HELI_FRAME && FRAME_CONFIG != HELI_DUAL_FRAME && FRAME_CONFIG != HELI_COMPOUND_FRAME
     struct log_MotBatt pkt_mot = {
         LOG_PACKET_HEADER_INIT(LOG_MOTBATT_MSG),
         time_us         : hal.scheduler->micros64(),
@@ -667,7 +667,7 @@ struct PACKED log_Heli {
     int16_t   estimated_rotor_speed;
 };
 
-#if FRAME_CONFIG == HELI_FRAME
+#if FRAME_CONFIG == HELI_FRAME || FRAME_CONFIG == HELI_DUAL_FRAME || FRAME_CONFIG == HELI_COMPOUND_FRAME
 // Write an helicopter packet
 void Copter::Log_Write_Heli()
 {

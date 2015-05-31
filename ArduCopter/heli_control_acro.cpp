@@ -2,7 +2,7 @@
 
 #include "Copter.h"
 
-#if FRAME_CONFIG == HELI_FRAME
+#if FRAME_CONFIG == HELI_FRAME || FRAME_CONFIG == HELI_DUAL_FRAME || FRAME_CONFIG == HELI_COMPOUND_FRAME
 /*
  * heli_control_acro.pde - init and run calls for acro flight mode for trad heli
  */
@@ -72,4 +72,4 @@ void Copter::get_pilot_desired_yaw_rate(int16_t yaw_in, float &yaw_out)
     yaw_out = rate_bf_yaw_request;
 }
 
-#endif  //HELI_FRAME
+#endif // FRAME_CONFIG == HELI_FRAME || FRAME_CONFIG == HELI_DUAL_FRAME || FRAME_CONFIG == HELI_COMPOUND_FRAME
