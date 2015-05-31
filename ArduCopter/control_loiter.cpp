@@ -9,7 +9,7 @@
 // loiter_init - initialise loiter controller
 bool Copter::loiter_init(bool ignore_checks)
 {
-#if FRAME_CONFIG == HELI_FRAME
+#if FRAME_TYPE == HELICOPTER
     // do not allow helis to enter Loiter if the Rotor Runup is not complete
     if (!ignore_checks && !motors.rotor_runup_complete()){
         return false;
@@ -91,7 +91,7 @@ void Copter::loiter_run()
     case Loiter_MotorStopped:
 
         motors.set_desired_spool_state(AP_Motors::DESIRED_SHUT_DOWN);
-#if FRAME_CONFIG == HELI_FRAME
+#if FRAME_TYPE == HELICOPTER
         // helicopters are capable of flying even with the motor stopped, therefore we will attempt to keep flying
         // run loiter controller
         wp_nav.update_loiter(ekfGndSpdLimit, ekfNavVelGainScaler);
@@ -114,7 +114,7 @@ void Copter::loiter_run()
 
         motors.set_desired_spool_state(AP_Motors::DESIRED_SPIN_WHEN_ARMED);
         wp_nav.init_loiter_target();
-#if FRAME_CONFIG == HELI_FRAME
+#if FRAME_TYPE == HELICOPTER
         // Helicopters always stabilize roll/pitch/yaw
         attitude_control.input_euler_angle_roll_pitch_euler_rate_yaw_smooth(0, 0, 0, get_smoothing_gain());
         attitude_control.set_throttle_out(0,false,g.throttle_filt);

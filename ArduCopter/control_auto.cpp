@@ -148,7 +148,7 @@ void Copter::auto_takeoff_run()
     if (!motors.armed() || !ap.auto_armed || !motors.get_interlock()) {
         // initialise wpnav targets
         wp_nav.shift_wp_origin_to_current_pos();
-#if FRAME_CONFIG == HELI_FRAME  // Helicopters always stabilize roll/pitch/yaw
+#if FRAME_TYPE == HELICOPTER // Helicopters always stabilize roll/pitch/yaw
         // call attitude controller
         attitude_control.input_euler_angle_roll_pitch_euler_rate_yaw_smooth(0, 0, 0, get_smoothing_gain());
         attitude_control.set_throttle_out(0,false,g.throttle_filt);
@@ -224,7 +224,7 @@ void Copter::auto_wp_run()
     if (!motors.armed() || !ap.auto_armed || !motors.get_interlock()) {
         // To-Do: reset waypoint origin to current location because copter is probably on the ground so we don't want it lurching left or right on take-off
         //    (of course it would be better if people just used take-off)
-#if FRAME_CONFIG == HELI_FRAME  // Helicopters always stabilize roll/pitch/yaw
+#if FRAME_TYPE == HELICOPTER // Helicopters always stabilize roll/pitch/yaw
         // call attitude controller
         attitude_control.input_euler_angle_roll_pitch_euler_rate_yaw_smooth(0, 0, 0, get_smoothing_gain());
         attitude_control.set_throttle_out(0,false,g.throttle_filt);
@@ -269,7 +269,7 @@ void Copter::auto_wp_run()
 // auto_spline_start - initialises waypoint controller to implement flying to a particular destination using the spline controller
 //  seg_end_type can be SEGMENT_END_STOP, SEGMENT_END_STRAIGHT or SEGMENT_END_SPLINE.  If Straight or Spline the next_destination should be provided
 void Copter::auto_spline_start(const Location_Class& destination, bool stopped_at_start,
-                               AC_WPNav::spline_segment_end_type seg_end_type, 
+                               AC_WPNav::spline_segment_end_type seg_end_type,
                                const Location_Class& next_destination)
 {
     auto_mode = Auto_Spline;
@@ -296,7 +296,7 @@ void Copter::auto_spline_run()
     if (!motors.armed() || !ap.auto_armed || !motors.get_interlock()) {
         // To-Do: reset waypoint origin to current location because copter is probably on the ground so we don't want it lurching left or right on take-off
         //    (of course it would be better if people just used take-off)
-#if FRAME_CONFIG == HELI_FRAME  // Helicopters always stabilize roll/pitch/yaw
+#if FRAME_TYPE == HELICOPTER // Helicopters always stabilize roll/pitch/yaw
         // call attitude controller
         attitude_control.input_euler_angle_roll_pitch_euler_rate_yaw_smooth(0, 0, 0, get_smoothing_gain());
         attitude_control.set_throttle_out(0,false,g.throttle_filt);
@@ -373,7 +373,7 @@ void Copter::auto_land_run()
 
     // if not auto armed or motor interlock not enabled set throttle to zero and exit immediately
     if (!motors.armed() || !ap.auto_armed || ap.land_complete) {
-#if FRAME_CONFIG == HELI_FRAME  // Helicopters always stabilize roll/pitch/yaw
+#if FRAME_TYPE == HELICOPTER // Helicopters always stabilize roll/pitch/yaw
         // call attitude controller
         attitude_control.input_euler_angle_roll_pitch_euler_rate_yaw_smooth(0, 0, 0, get_smoothing_gain());
         attitude_control.set_throttle_out(0,false,g.throttle_filt);
@@ -585,7 +585,7 @@ void Copter::auto_loiter_run()
 {
     // if not auto armed or motor interlock not enabled set throttle to zero and exit immediately
     if (!motors.armed() || !ap.auto_armed || ap.land_complete || !motors.get_interlock()) {
-#if FRAME_CONFIG == HELI_FRAME  // Helicopters always stabilize roll/pitch/yaw
+#if FRAME_TYPE == HELICOPTER // Helicopters always stabilize roll/pitch/yaw
         // call attitude controller
         attitude_control.input_euler_angle_roll_pitch_euler_rate_yaw_smooth(0, 0, 0, get_smoothing_gain());
         attitude_control.set_throttle_out(0,false,g.throttle_filt);
@@ -783,4 +783,3 @@ float Copter::get_auto_heading(void)
         break;
     }
 }
-

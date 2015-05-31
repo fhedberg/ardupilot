@@ -10,7 +10,7 @@ void Copter::default_dead_zones()
 {
     channel_roll->set_default_dead_zone(30);
     channel_pitch->set_default_dead_zone(30);
-#if FRAME_CONFIG == HELI_FRAME
+#if FRAME_TYPE == HELICOPTER
     channel_throttle->set_default_dead_zone(10);
     channel_yaw->set_default_dead_zone(15);
     g.rc_8.set_default_dead_zone(10);
@@ -57,7 +57,7 @@ void Copter::init_rc_out()
     motors.set_update_rate(g.rc_speed);
     motors.set_frame_orientation(g.frame_orientation);
     motors.Init();                                              // motor initialisation
-#if FRAME_CONFIG != HELI_FRAME
+#if FRAME_TYPE == MULTICOPTER
     motors.set_throttle_range(g.throttle_min, channel_throttle->get_radio_min(), channel_throttle->get_radio_max());
     motors.set_hover_throttle(g.throttle_mid);
 #endif
@@ -71,7 +71,7 @@ void Copter::init_rc_out()
     channel_throttle->set_range_out(0,1000);
 
     // setup correct scaling for ESCs like the UAVCAN PX4ESC which
-    // take a proportion of speed. 
+    // take a proportion of speed.
     hal.rcout->set_esc_scaling(channel_throttle->get_radio_min(), channel_throttle->get_radio_max());
 
     // check if we should enter esc calibration mode
@@ -185,7 +185,7 @@ void Copter::set_throttle_zero_flag(int16_t throttle_control)
     uint32_t tnow_ms = millis();
 
     // if not using throttle interlock and non-zero throttle and not E-stopped,
-    // or using motor interlock and it's enabled, then motors are running, 
+    // or using motor interlock and it's enabled, then motors are running,
     // and we are flying. Immediately set as non-zero
     if ((!ap.using_interlock && (throttle_control > 0) && !ap.motor_emergency_stop) || (ap.using_interlock && motors.get_interlock())) {
         last_nonzero_throttle_ms = tnow_ms;

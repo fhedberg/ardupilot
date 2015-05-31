@@ -324,7 +324,7 @@ void Copter::guided_takeoff_run()
 {
     // if not auto armed or motors not enabled set throttle to zero and exit immediately
     if (!motors.armed() || !ap.auto_armed || !motors.get_interlock()) {
-#if FRAME_CONFIG == HELI_FRAME  // Helicopters always stabilize roll/pitch/yaw
+#if FRAME_TYPE == HELICOPTER // Helicopters always stabilize roll/pitch/yaw
         // call attitude controller
         attitude_control.input_euler_angle_roll_pitch_euler_rate_yaw_smooth(0, 0, 0, get_smoothing_gain());
         attitude_control.set_throttle_out(0,false,g.throttle_filt);
@@ -362,7 +362,7 @@ void Copter::guided_pos_control_run()
 {
     // if not auto armed or motors not enabled set throttle to zero and exit immediately
     if (!motors.armed() || !ap.auto_armed || !motors.get_interlock() || ap.land_complete) {
-#if FRAME_CONFIG == HELI_FRAME  // Helicopters always stabilize roll/pitch/yaw
+#if FRAME_TYPE == HELICOPTER // Helicopters always stabilize roll/pitch/yaw
         // call attitude controller
         attitude_control.input_euler_angle_roll_pitch_euler_rate_yaw_smooth(0, 0, 0, get_smoothing_gain());
         attitude_control.set_throttle_out(0,false,g.throttle_filt);
@@ -411,7 +411,8 @@ void Copter::guided_vel_control_run()
     if (!motors.armed() || !ap.auto_armed || !motors.get_interlock() || ap.land_complete) {
         // initialise velocity controller
         pos_control.init_vel_controller_xyz();
-#if FRAME_CONFIG == HELI_FRAME  // Helicopters always stabilize roll/pitch/yaw
+#if FRAME_TYPE == HELICOPTER
+        // Helicopters always stabilize roll/pitch/yaw
         // call attitude controller
         attitude_control.input_euler_angle_roll_pitch_euler_rate_yaw_smooth(0, 0, 0, get_smoothing_gain());
         attitude_control.set_throttle_out(0,false,g.throttle_filt);
@@ -464,7 +465,8 @@ void Copter::guided_posvel_control_run()
         // set target position and velocity to current position and velocity
         pos_control.set_pos_target(inertial_nav.get_position());
         pos_control.set_desired_velocity(Vector3f(0,0,0));
-#if FRAME_CONFIG == HELI_FRAME  // Helicopters always stabilize roll/pitch/yaw
+#if FRAME_TYPE == HELICOPTER
+        // Helicopters always stabilize roll/pitch/yaw
         // call attitude controller
         attitude_control.input_euler_angle_roll_pitch_euler_rate_yaw_smooth(0, 0, 0, get_smoothing_gain());
         attitude_control.set_throttle_out(0,false,g.throttle_filt);
@@ -535,7 +537,7 @@ void Copter::guided_angle_control_run()
 {
     // if not auto armed or motors not enabled set throttle to zero and exit immediately
     if (!motors.armed() || !ap.auto_armed || !motors.get_interlock() || ap.land_complete) {
-#if FRAME_CONFIG == HELI_FRAME  // Helicopters always stabilize roll/pitch/yaw
+#if FRAME_TYPE == HELICOPTER // Helicopters always stabilize roll/pitch/yaw
         // call attitude controller
         attitude_control.set_yaw_target_to_current_heading();
         attitude_control.input_euler_angle_roll_pitch_euler_rate_yaw_smooth(0.0f, 0.0f, 0.0f, get_smoothing_gain());

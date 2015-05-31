@@ -9,7 +9,7 @@
 // althold_init - initialise althold controller
 bool Copter::althold_init(bool ignore_checks)
 {
-#if FRAME_CONFIG == HELI_FRAME
+#if FRAME_TYPE == HELICOPTER
     // do not allow helis to enter Alt Hold if the Rotor Runup is not complete
     if (!ignore_checks && !motors.rotor_runup_complete()){
         return false;
@@ -55,7 +55,7 @@ void Copter::althold_run()
     float target_climb_rate = get_pilot_desired_climb_rate(channel_throttle->get_control_in());
     target_climb_rate = constrain_float(target_climb_rate, -g.pilot_velocity_z_max, g.pilot_velocity_z_max);
 
-#if FRAME_CONFIG == HELI_FRAME
+#if FRAME_TYPE == HELICOPTER
     // helicopters are held on the ground until rotor speed runup has finished
     bool takeoff_triggered = (ap.land_complete && (channel_throttle->get_control_in() > get_takeoff_trigger_throttle()) && motors.rotor_runup_complete());
 #else
@@ -81,7 +81,7 @@ void Copter::althold_run()
     case AltHold_MotorStopped:
 
         motors.set_desired_spool_state(AP_Motors::DESIRED_SHUT_DOWN);
-#if FRAME_CONFIG == HELI_FRAME    
+#if FRAME_TYPE == HELICOPTER
         // helicopters are capable of flying even with the motor stopped, therefore we will attempt to keep flying
         // call attitude controller
         attitude_control.input_euler_angle_roll_pitch_euler_rate_yaw_smooth(target_roll, target_pitch, target_yaw_rate, get_smoothing_gain());
@@ -99,7 +99,7 @@ void Copter::althold_run()
     case AltHold_NotAutoArmed:
 
         motors.set_desired_spool_state(AP_Motors::DESIRED_SPIN_WHEN_ARMED);
-#if FRAME_CONFIG == HELI_FRAME
+#if FRAME_TYPE == HELICOPTER
         // Helicopters always stabilize roll/pitch/yaw
         attitude_control.set_yaw_target_to_current_heading();
         attitude_control.input_euler_angle_roll_pitch_euler_rate_yaw_smooth(target_roll, target_pitch, target_yaw_rate, get_smoothing_gain());
@@ -139,7 +139,7 @@ void Copter::althold_run()
 
     case AltHold_Landed:
 
-#if FRAME_CONFIG == HELI_FRAME
+#if FRAME_TYPE == HELICOPTER
         attitude_control.set_yaw_target_to_current_heading();
 #endif
         // call attitude controller
