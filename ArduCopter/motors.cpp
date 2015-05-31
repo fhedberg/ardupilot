@@ -540,7 +540,7 @@ bool Copter::pre_arm_checks(bool display_failure)
             return false;
         }
 #endif
-#if FRAME_CONFIG == HELI_FRAME
+#if FRAME_CONFIG == HELI_FRAME || FRAME_CONFIG == HELI_DUAL_FRAME || FRAME_CONFIG == HELI_COMPOUND_FRAME
         // check helicopter parameters
         if (!motors.parameter_check()) {
             if (display_failure) {
@@ -548,7 +548,7 @@ bool Copter::pre_arm_checks(bool display_failure)
             }
             return false;
         }
-#endif // HELI_FRAME
+#endif // FRAME_CONFIG == HELI_FRAME || FRAME_CONFIG == HELI_DUAL_FRAME || FRAME_CONFIG == HELI_COMPOUND_FRAME
     }
 
     // check throttle is above failsafe throttle
@@ -556,7 +556,7 @@ bool Copter::pre_arm_checks(bool display_failure)
     if ((g.arming_check == ARMING_CHECK_ALL) || (g.arming_check & ARMING_CHECK_RC)) {
         if (g.failsafe_throttle != FS_THR_DISABLED && channel_throttle->radio_in < g.failsafe_throttle_value) {
             if (display_failure) {
-    #if FRAME_CONFIG == HELI_FRAME
+    #if FRAME_CONFIG == HELI_FRAME || FRAME_CONFIG == HELI_DUAL_FRAME || FRAME_CONFIG == HELI_COMPOUND_FRAME
                 gcs_send_text_P(SEVERITY_HIGH,PSTR("PreArm: Collective below Failsafe"));
     #else
                 gcs_send_text_P(SEVERITY_HIGH,PSTR("PreArm: Throttle below Failsafe"));
@@ -722,7 +722,7 @@ bool Copter::arm_checks(bool display_failure, bool arming_from_gcs)
     }
 
     // heli specific arming check
-#if FRAME_CONFIG == HELI_FRAME
+#if FRAME_CONFIG == HELI_FRAME || FRAME_CONFIG == HELI_DUAL_FRAME || FRAME_CONFIG == HELI_COMPOUND_FRAME
     // check if rotor is spinning on heli because this could disrupt gyro calibration
     if (!motors.allow_arming()){
         if (display_failure) {
@@ -730,7 +730,7 @@ bool Copter::arm_checks(bool display_failure, bool arming_from_gcs)
         }
         return false;
     }
-#endif  // HELI_FRAME
+#endif
 
     // succeed if arming checks are disabled
     if (g.arming_check == ARMING_CHECK_NONE) {
@@ -799,7 +799,7 @@ bool Copter::arm_checks(bool display_failure, bool arming_from_gcs)
         // check throttle is not too low - must be above failsafe throttle
         if (g.failsafe_throttle != FS_THR_DISABLED && channel_throttle->radio_in < g.failsafe_throttle_value) {
             if (display_failure) {
-#if FRAME_CONFIG == HELI_FRAME
+#if FRAME_CONFIG == HELI_FRAME || FRAME_CONFIG == HELI_DUAL_FRAME || FRAME_CONFIG == HELI_COMPOUND_FRAME
                 gcs_send_text_P(SEVERITY_HIGH,PSTR("Arm: Collective below Failsafe"));
 #else
                 gcs_send_text_P(SEVERITY_HIGH,PSTR("Arm: Throttle below Failsafe"));
@@ -813,7 +813,7 @@ bool Copter::arm_checks(bool display_failure, bool arming_from_gcs)
             // above top of deadband is too always high
             if (channel_throttle->control_in > get_takeoff_trigger_throttle()) {
                 if (display_failure) {
-#if FRAME_CONFIG == HELI_FRAME
+#if FRAME_CONFIG == HELI_FRAME || FRAME_CONFIG == HELI_DUAL_FRAME || FRAME_CONFIG == HELI_COMPOUND_FRAME
                     gcs_send_text_P(SEVERITY_HIGH,PSTR("Arm: Collective too high"));
 #else
                     gcs_send_text_P(SEVERITY_HIGH,PSTR("Arm: Throttle too high"));
@@ -824,7 +824,7 @@ bool Copter::arm_checks(bool display_failure, bool arming_from_gcs)
             // in manual modes throttle must be at zero
             if ((mode_has_manual_throttle(control_mode) || control_mode == DRIFT) && channel_throttle->control_in > 0) {
                 if (display_failure) {
-#if FRAME_CONFIG == HELI_FRAME
+#if FRAME_CONFIG == HELI_FRAME || FRAME_CONFIG == HELI_DUAL_FRAME || FRAME_CONFIG == HELI_COMPOUND_FRAME
                     gcs_send_text_P(SEVERITY_HIGH,PSTR("Arm: Collective too high"));
 #else
                     gcs_send_text_P(SEVERITY_HIGH,PSTR("Arm: Throttle too high"));
