@@ -110,7 +110,7 @@ const AP_Scheduler::Task Copter::scheduler_tasks[] PROGMEM = {
     { SCHED_TASK(three_hz_loop),       133,     75 },
     { SCHED_TASK(compass_accumulate),    8,    100 },
     { SCHED_TASK(barometer_accumulate),  8,     90 },
-#if FRAME_CONFIG == HELI_FRAME
+#if FRAME_CONFIG == HELI_FRAME || FRAME_CONFIG == HELI_DUAL_FRAME || FRAME_CONFIG == HELI_COMPOUND_FRAME
     { SCHED_TASK(check_dynamic_flight),  8,     75 },
 #endif
     { SCHED_TASK(update_notify),         8,     90 },
@@ -250,9 +250,9 @@ void Copter::fast_loop()
     // run low level rate controllers that only require IMU data
     attitude_control.rate_controller_run();
     
-#if FRAME_CONFIG == HELI_FRAME
+#if FRAME_CONFIG == HELI_FRAME || FRAME_CONFIG == HELI_DUAL_FRAME || FRAME_CONFIG == HELI_COMPOUND_FRAME
     update_heli_control_dynamics();
-#endif //HELI_FRAME
+#endif
 
     // send outputs to the motors library
     motors_output();
@@ -297,7 +297,7 @@ void Copter::throttle_loop()
     // check auto_armed status
     update_auto_armed();
 
-#if FRAME_CONFIG == HELI_FRAME
+#if FRAME_CONFIG == HELI_FRAME || FRAME_CONFIG == HELI_DUAL_FRAME || FRAME_CONFIG == HELI_COMPOUND_FRAME
     // update rotor speed
     heli_update_rotor_speed_targets();
 

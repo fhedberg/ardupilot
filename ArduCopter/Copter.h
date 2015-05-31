@@ -285,7 +285,11 @@ private:
 #elif FRAME_CONFIG == OCTA_QUAD_FRAME
  #define MOTOR_CLASS AP_MotorsOctaQuad
 #elif FRAME_CONFIG == HELI_FRAME
- #define MOTOR_CLASS AP_MotorsHeli
+ #define MOTOR_CLASS AP_MotorsHeli_Single
+#elif FRAME_CONFIG == HELI_DUAL_FRAME
+ #define MOTOR_CLASS AP_MotorsHeli_Dual
+#elif FRAME_CONFIG == HELI_COMPOUND_FRAME
+ #define MOTOR_CLASS AP_MotorsHeli_Compound
 #elif FRAME_CONFIG == SINGLE_FRAME
  #define MOTOR_CLASS AP_MotorsSingle
 #elif FRAME_CONFIG == COAX_FRAME
@@ -402,7 +406,7 @@ private:
 
     // Attitude, Position and Waypoint navigation objects
     // To-Do: move inertial nav up or other navigation variables down here
-#if FRAME_CONFIG == HELI_FRAME
+#if FRAME_CONFIG == HELI_FRAME || FRAME_CONFIG == HELI_DUAL_FRAME || FRAME_CONFIG == HELI_COMPOUND_FRAME
     AC_AttitudeControl_Heli attitude_control;
 #else
     AC_AttitudeControl attitude_control;
@@ -489,7 +493,7 @@ private:
     // setup the var_info table
     AP_Param param_loader;
 
-#if FRAME_CONFIG == HELI_FRAME
+#if FRAME_CONFIG == HELI_FRAME || FRAME_CONFIG == HELI_DUAL_FRAME || FRAME_CONFIG == HELI_COMPOUND_FRAME
     // Mode filter to reject RC Input glitches.  Filter size is 5, and it draws the 4th element, so it can reject 3 low glitches,
     // and 1 high glitch.  This is because any "off" glitches can be highly problematic for a helicopter running an ESC
     // governor.  Even a single "off" frame can cause the rotor to slow dramatically and take a long time to restart.

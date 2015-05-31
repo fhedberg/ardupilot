@@ -691,8 +691,8 @@ bool Copter::arm_checks(bool display_failure, bool arming_from_gcs)
         return false;
     }
 
-    // always check if rotor is spinning on heli
-    #if FRAME_CONFIG == HELI_FRAME
+    // always check if rotor throttle is disengaged on heli
+    #if FRAME_CONFIG == HELI_FRAME || FRAME_CONFIG == HELI_DUAL_FRAME || FRAME_CONFIG == HELI_COMPOUND_FRAME
     // heli specific arming check
     if (!motors.allow_arming()){
         if (display_failure) {
@@ -700,7 +700,7 @@ bool Copter::arm_checks(bool display_failure, bool arming_from_gcs)
         }
         return false;
     }
-    #endif  // HELI_FRAME
+    #endif
 
     // succeed if arming checks are disabled
     if (g.arming_check == ARMING_CHECK_NONE) {

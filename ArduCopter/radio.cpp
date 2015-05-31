@@ -10,7 +10,7 @@ void Copter::default_dead_zones()
 {
     channel_roll->set_default_dead_zone(30);
     channel_pitch->set_default_dead_zone(30);
-#if FRAME_CONFIG == HELI_FRAME
+#if FRAME_CONFIG == HELI_FRAME || FRAME_CONFIG == HELI_DUAL_FRAME || FRAME_CONFIG == HELI_COMPOUND_FRAME
     channel_throttle->set_default_dead_zone(10);
     channel_yaw->set_default_dead_zone(15);
     g.rc_8.set_default_dead_zone(10);
