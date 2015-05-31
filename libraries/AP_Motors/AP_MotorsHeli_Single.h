@@ -85,7 +85,7 @@ public:
 
     // calculate_armed_scalars - recalculates scalars that can change while armed
     void calculate_armed_scalars();
-    
+
     // get_motor_mask - returns a bitmask of which outputs are being used for motors or servos (1 means being used)
     //  this can be used to ensure other pwm outputs (i.e. for servos) do not conflict
     uint16_t get_motor_mask();
@@ -103,14 +103,14 @@ public:
 
     // parameter_check - returns true if helicopter specific parameters are sensible, used for pre-arm check
     bool parameter_check(bool display_msg) const;
-    
+
     // var_info
     static const struct AP_Param::GroupInfo var_info[];
 
 protected:
 
     // init_outputs - initialise Servo/PWM ranges and endpoints
-    void init_outputs();
+    virtual void init_outputs();
 
     // update_motor_controls - sends commands to motor controllers
     void update_motor_control(RotorControlState state);
@@ -122,7 +122,7 @@ protected:
     void move_actuators(float roll_out, float pitch_out, float coll_in, float yaw_out);
 
     // move_yaw - moves the yaw servo
-    void move_yaw(float yaw_out);
+    virtual void move_yaw(float yaw_out);
 
     // write_aux - converts servo_out parameter value (0 to 1 range) to pwm and outputs to aux channel (ch7)
     void write_aux(float servo_out);
@@ -146,7 +146,7 @@ protected:
     // parameters
     AP_Int16        _servo1_pos;                // Angular location of swash servo #1
     AP_Int16        _servo2_pos;                // Angular location of swash servo #2
-    AP_Int16        _servo3_pos;                // Angular location of swash servo #3    
+    AP_Int16        _servo3_pos;                // Angular location of swash servo #3
     AP_Int16        _tail_type;                 // Tail type used: Servo, Servo with external gyro, direct drive variable pitch or direct drive fixed pitch
     AP_Int8         _swash_type;                // Swash Type Setting - either 3-servo CCPM or H1 Mechanical Mixing
     AP_Int16        _ext_gyro_gain_std;         // PWM sent to external gyro on ch7 when tail type is Servo w/ ExtGyro
