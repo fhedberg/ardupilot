@@ -6,7 +6,7 @@
 // throw_init - initialise throw controller
 bool Copter::throw_init(bool ignore_checks)
 {
-#if FRAME_CONFIG == HELI_FRAME
+#if FRAME_TYPE == HELICOPTER
     // do not allow helis to use throw to start
     return false;
 #endif
@@ -226,4 +226,3 @@ bool Copter::throw_height_good()
     // Check that we are no more than 0.5m below the demanded height
     return (pos_control.get_alt_error() < 50.0f);
 }
-

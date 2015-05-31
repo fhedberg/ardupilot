@@ -10,7 +10,7 @@ void Copter::default_dead_zones()
 {
     channel_roll->set_default_dead_zone(30);
     channel_pitch->set_default_dead_zone(30);
-#if FRAME_CONFIG == HELI_FRAME
+#if FRAME_TYPE == HELICOPTER
     channel_throttle->set_default_dead_zone(10);
     channel_yaw->set_default_dead_zone(15);
     g.rc_8.set_default_dead_zone(10);
@@ -57,7 +57,7 @@ void Copter::init_rc_out()
     motors.set_update_rate(g.rc_speed);
     motors.set_frame_orientation(g.frame_orientation);
     motors.Init();                                              // motor initialisation
-#if FRAME_CONFIG != HELI_FRAME
+#if FRAME_TYPE == MULTICOPTER
     motors.set_throttle_range(g.throttle_min, channel_throttle->radio_min, channel_throttle->radio_max);
     motors.set_hover_throttle(g.throttle_mid);
 #endif

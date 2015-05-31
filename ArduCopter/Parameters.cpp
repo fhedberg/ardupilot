@@ -130,7 +130,7 @@ const AP_Param::Info Copter::var_info[] = {
     // @Increment: 1
     // @User: Standard
     GSCALAR(rtl_altitude,   "RTL_ALT",     RTL_ALT),
-    
+
     // @Param: RTL_CONE_SLOPE
     // @DisplayName: RTL cone slope
     // @Description: Defines a cone above home which determines maximum climb
@@ -259,7 +259,7 @@ const AP_Param::Info Copter::var_info[] = {
     // @Increment: 10
     // @User: Standard
     GSCALAR(land_speed_high,        "LAND_SPEED_HIGH",   0),
-    
+
     // @Param: PILOT_VELZ_MAX
     // @DisplayName: Pilot maximum vertical speed
     // @Description: The maximum vertical velocity the pilot may request in cm/s
@@ -469,7 +469,7 @@ const AP_Param::Info Copter::var_info[] = {
     // @Range: 0 127
     // @User: Advanced
     GSCALAR(disarm_delay, "DISARM_DELAY",           AUTO_DISARMING_DELAY),
-    
+
     // @Param: ANGLE_MAX
     // @DisplayName: Angle Max
     // @Description: Maximum lean angle in all flight modes
@@ -742,7 +742,7 @@ const AP_Param::Info Copter::var_info[] = {
     // @Path: ../libraries/AP_LandingGear/AP_LandingGear.cpp
     GOBJECT(landinggear,    "LGR_", AP_LandingGear),
 
-#if FRAME_CONFIG == HELI_FRAME
+#if FRAME_TYPE == HELICOPTER
     // @Group: IM_
     // @Path: ../libraries/AC_InputManager/AC_InputManager_Heli.cpp
     GOBJECT(input_manager, "IM_", AC_InputManager_Heli),
@@ -764,8 +764,14 @@ const AP_Param::Info Copter::var_info[] = {
     // @Path: ../libraries/AC_WPNav/AC_Circle.cpp
     GOBJECT(circle_nav, "CIRCLE_",  AC_Circle),
 
-#if FRAME_CONFIG == HELI_FRAME
+#if FRAME_CONFIG == HELI_FRAME || FRAME_CONFIG == HELI_DUAL_FRAME
+    // @Group: ATC_
+    // @Path: ../libraries/AC_AttitudeControl/AC_AttitudeControl_Heli.cpp
     GOBJECT(attitude_control, "ATC_", AC_AttitudeControl_Heli),
+#elif FRAME_CONFIG == HELI_COMPOUND_FRAME
+    // @Group: ATC_
+    // @Path: ../libraries/AC_AttitudeControl/AC_AttitudeControl_Heli_Compound.cpp
+    GOBJECT(attitude_control, "ATC_", AC_AttitudeControl_Heli_Compound),
 #else
     // @Group: ATC_
     // @Path: ../libraries/AC_AttitudeControl/AC_AttitudeControl_Multi.cpp
@@ -849,10 +855,24 @@ const AP_Param::Info Copter::var_info[] = {
     GOBJECT(rally,      "RALLY_",   AP_Rally),
 #endif
 
-#if FRAME_CONFIG ==     HELI_FRAME
+#if FRAME_CONFIG == HELI_FRAME
     // @Group: H_
     // @Path: ../libraries/AP_Motors/AP_MotorsHeli_Single.cpp
     GOBJECT(motors, "H_",           AP_MotorsHeli_Single),
+
+#elif FRAME_CONFIG == HELI_DUAL_FRAME
+    // @Group: H_
+    // @Path: ../libraries/AP_Motors/AP_MotorsHeli_Dual.cpp
+    GOBJECT(motors, "H_",           AP_MotorsHeli_Dual),
+
+#elif FRAME_CONFIG == HELI_COMPOUND_FRAME
+    // @Path: ../libraries/AP_Motors/AP_MotorsHeli_Compound.cpp
+    GOBJECT(motors, "H_",           AP_MotorsHeli_Compound),
+
+#elif FRAME_CONFIG == HELI_TILTROTOR_FRAME
+    // @Group: H_
+    // @Path: ../libraries/AP_Motors/AP_MotorsHeli_Tiltrotor.cpp
+    GOBJECT(motors, "H_",           AP_MotorsHeli_Tiltrotor),
 
 #elif FRAME_CONFIG == SINGLE_FRAME
     // @Group: MOT_
@@ -886,15 +906,15 @@ const AP_Param::Info Copter::var_info[] = {
     // @Group: EK2_
     // @Path: ../libraries/AP_NavEKF2/AP_NavEKF2.cpp
     GOBJECTN(EKF2, NavEKF2, "EK2_", NavEKF2),
-    
+
     // @Group: MIS_
     // @Path: ../libraries/AP_Mission/AP_Mission.cpp
     GOBJECT(mission, "MIS_",       AP_Mission),
 
     // @Group: RSSI_
     // @Path: ../libraries/AP_RSSI/AP_RSSI.cpp
-    GOBJECT(rssi, "RSSI_",  AP_RSSI),      
-    
+    GOBJECT(rssi, "RSSI_",  AP_RSSI),
+
 #if CONFIG_SONAR == ENABLED
     // @Group: RNGFND
     // @Path: ../libraries/AP_RangeFinder/RangeFinder.cpp
