@@ -897,10 +897,14 @@ const AP_Param::Info Copter::var_info[] PROGMEM = {
     // @Path: ../libraries/AC_WPNav/AC_Circle.cpp
     GOBJECT(circle_nav, "CIRCLE_",  AC_Circle),
 
-#if FRAME_CONFIG == HELI_FRAME || FRAME_CONFIG == HELI_DUAL_FRAME || FRAME_CONFIG == HELI_COMPOUND_FRAME
+#if FRAME_CONFIG == HELI_FRAME || FRAME_CONFIG == HELI_DUAL_FRAME
     // @Group: ATC_
     // @Path: ../libraries/AC_AttitudeControl/AC_AttitudeControl_Heli.cpp
     GOBJECT(attitude_control, "ATC_", AC_AttitudeControl_Heli),
+#elif FRAME_CONFIG == HELI_COMPOUND_FRAME
+    // @Group: ATC_
+    // @Path: ../libraries/AC_AttitudeControl/AC_AttitudeControl_Heli_Compound.cpp
+    GOBJECT(attitude_control, "ATC_", AC_AttitudeControl_Heli_Compound),
 #else
     // @Group: ATC_
     // @Path: ../libraries/AC_AttitudeControl/AC_AttitudeControl.cpp

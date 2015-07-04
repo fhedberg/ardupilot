@@ -66,6 +66,7 @@
 #include <AC_P.h>               // P library
 #include <AC_AttitudeControl_Multi.h> // Attitude control library
 #include <AC_AttitudeControl_Heli.h> // Attitude control library for traditional helicopter
+#include <AC_AttitudeControl_Heli_Compound.h> // Attitude control library for compound helicopter
 #include <AC_PosControl.h>      // Position control library
 #include <RC_Channel.h>         // RC Channel Library
 #include <AP_Motors.h>          // AP Motors library
@@ -412,8 +413,10 @@ private:
 
     // Attitude, Position and Waypoint navigation objects
     // To-Do: move inertial nav up or other navigation variables down here
-#if FRAME_CONFIG == HELI_FRAME || FRAME_CONFIG == HELI_DUAL_FRAME || FRAME_CONFIG == HELI_COMPOUND_FRAME
+#if FRAME_CONFIG == HELI_FRAME || FRAME_CONFIG == HELI_DUAL_FRAME
     AC_AttitudeControl_Heli attitude_control;
+#elif FRAME_CONFIG == HELI_COMPOUND_FRAME
+    AC_AttitudeControl_Heli_Compound attitude_control;
 #else
     AC_AttitudeControl_Multi attitude_control;
 #endif
