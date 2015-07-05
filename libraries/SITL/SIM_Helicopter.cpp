@@ -104,7 +104,7 @@ void Helicopter::update(const struct sitl_input &input)
         pitch_rate = (swash1+swash2) / 2.0f - swash3;
         yaw_rate = right_rotor - left_rotor;
 
-        lateral_x_thrust = (left_rotor+right_rotor-1) * rsc_scale * tail_thrust_scale * -1;
+        lateral_x_thrust = (left_rotor+right_rotor-1) * rsc_scale * tail_thrust_scale;
     }
 
     roll_rate *= rsc_scale;
