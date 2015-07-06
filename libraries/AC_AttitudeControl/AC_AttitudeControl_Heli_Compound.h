@@ -7,6 +7,7 @@
 #define AC_ATTITUDECONTROL_HELI_COMPOUND_H
 
 #include <AC_AttitudeControl_Heli.h>
+#include <AP_ControlSurfaces.h>
 #include <AC_HELI_PID.h>
 #include <Filter.h>
 
@@ -18,10 +19,12 @@ public:
                                      const AP_Vehicle::MultiCopter &aparm,
                                      AP_MotorsHeli& motors,
                                      AC_P& p_angle_roll, AC_P& p_angle_pitch, AC_P& p_angle_yaw,
-                                     AC_HELI_PID& pid_rate_roll, AC_HELI_PID& pid_rate_pitch, AC_HELI_PID& pid_rate_yaw) :
+                                     AC_HELI_PID& pid_rate_roll, AC_HELI_PID& pid_rate_pitch, AC_HELI_PID& pid_rate_yaw,
+                                     AP_ControlSurfaces &control_surfaces) :
         AC_AttitudeControl_Heli(ahrs, aparm, motors,
                                 p_angle_roll, p_angle_pitch, p_angle_yaw,
-                                pid_rate_roll, pid_rate_pitch, pid_rate_yaw)
+                                pid_rate_roll, pid_rate_pitch, pid_rate_yaw),
+        _control_surfaces(control_surfaces)
 		{
             AP_Param::setup_object_defaults(this, var_info);
 		}
@@ -62,11 +65,12 @@ private:
 
     // parameters
 
-    AP_Float    _forward_pitch_angle;
+    AP_Float                _forward_pitch_angle;
 
     // internal variables
 
-    int16_t     _boost;
+    AP_ControlSurfaces      _control_surfaces;
+    int16_t                 _boost;
 
 };
 
