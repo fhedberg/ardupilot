@@ -84,9 +84,14 @@ Copter::Copter(void) :
     condition_start(0),
     G_Dt(0.0025f),
     inertial_nav(ahrs),
-#if FRAME_CONFIG == HELI_FRAME || FRAME_CONFIG == HELI_DUAL_FRAME || FRAME_CONFIG == HELI_COMPOUND_FRAME
+#if FRAME_CONFIG == HELI_FRAME || FRAME_CONFIG == HELI_DUAL_FRAME
     attitude_control(ahrs, aparm, motors, g.p_stabilize_roll, g.p_stabilize_pitch, g.p_stabilize_yaw,
                      g.pid_rate_roll, g.pid_rate_pitch, g.pid_rate_yaw),
+#elif FRAME_CONFIG == HELI_COMPOUND_FRAME
+    control_surfaces(ahrs, channel_pitch, channel_roll, channel_yaw),
+    attitude_control(ahrs, aparm, motors, g.p_stabilize_roll, g.p_stabilize_pitch, g.p_stabilize_yaw,
+                     g.pid_rate_roll, g.pid_rate_pitch, g.pid_rate_yaw,
+                     control_surfaces),
 #else
     attitude_control(ahrs, aparm, motors, g.p_stabilize_roll, g.p_stabilize_pitch, g.p_stabilize_yaw,
                      g.pid_rate_roll, g.pid_rate_pitch, g.pid_rate_yaw),

@@ -165,9 +165,10 @@ public:
         k_param_heli_servo_6, // 89
 
         //
-        // 90: Motors
+        // 90: Motors & control surfaces
         //
         k_param_motors = 90,
+        k_param_control_surfaces = 91,
 
         //
         // 100: Inertial Nav

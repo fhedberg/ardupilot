@@ -894,6 +894,9 @@ const AP_Param::Info Copter::var_info[] PROGMEM = {
     GOBJECT(attitude_control, "ATC_", AC_AttitudeControl_Heli),
 #elif FRAME_CONFIG == HELI_COMPOUND_FRAME
     // @Group: ATC_
+    // @Path: ../libraries/AP_ControlSurfaces/AP_ControlSurfaces.cpp
+    GOBJECT(control_surfaces, "CS_", AP_ControlSurfaces),
+    // @Group: ATC_
     // @Path: ../libraries/AC_AttitudeControl/AC_AttitudeControl_Heli_Compound.cpp
     GOBJECT(attitude_control, "ATC_", AC_AttitudeControl_Heli_Compound),
 #else

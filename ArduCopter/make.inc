@@ -35,6 +35,7 @@ LIBRARIES += AC_AttitudeControl
 LIBRARIES += AC_AttitudeControl_Heli
 LIBRARIES += AC_PosControl
 LIBRARIES += RC_Channel
+LIBRARIES += AP_ControlSurfaces
 LIBRARIES += AP_Motors
 LIBRARIES += AP_RangeFinder
 LIBRARIES += AP_OpticalFlow
