@@ -106,8 +106,6 @@ protected:
     // move_actuators - moves swash plate to attitude of parameters passed in
     void move_actuators(float roll_out, float pitch_out, float coll_in, float yaw_out);
 
-private:
-
     //  objects we depend upon
     AP_MotorsHeli_RSC           _rotor;             // main rotor controller
 
