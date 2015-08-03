@@ -127,8 +127,6 @@ protected:
     // heli_move_swash - moves swash plate to attitude of parameters passed in
     void move_swash(int16_t roll_out, int16_t pitch_out, int16_t coll_in, int16_t yaw_out);
 
-private:
-
     //  objects we depend upon
     RC_Channel&                 _servo_1;           // swash plate servo #1
     RC_Channel&                 _servo_2;           // swash plate servo #2
