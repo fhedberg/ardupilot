@@ -294,7 +294,7 @@ private:
 #elif FRAME_CONFIG == HELI_FRAME
  #define MOTOR_CLASS AP_MotorsHeli_Single
 #elif FRAME_CONFIG == HELI_DUAL_FRAME
- #define MOTOR_CLASS AP_MotorsHeli_Dual
+ #define MOTOR_CLASS AP_MotorsHeli_Tiltrotor
 #elif FRAME_CONFIG == HELI_COMPOUND_FRAME
  #define MOTOR_CLASS AP_MotorsHeli_Compound
 #elif FRAME_CONFIG == SINGLE_FRAME
@@ -800,6 +800,7 @@ private:
     void update_heli_control_dynamics(void);
     void heli_update_landing_swash();
     void heli_update_rotor_speed_targets();
+    void heli_update_tiltrotor_tvec_angle();
     void heli_radio_passthrough();
     bool heli_acro_init(bool ignore_checks);
     void heli_acro_run();

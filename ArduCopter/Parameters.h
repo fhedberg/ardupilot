@@ -168,6 +168,7 @@ public:
         // 90: Motors
         //
         k_param_motors = 90,
+        k_param_tvec_servo,
 
         //
         // 100: Inertial Nav
@@ -444,6 +445,11 @@ public:
     AP_Int16        heli_stab_col_max;                                          // min collective while pilot directly controls collective in stabilize mode
 #endif
 
+// TODO: Enable this for HELI_TILTROTOR_FRAME only
+#if FRAME_CONFIG ==     HELI_DUAL_FRAME
+    RC_Channel      tvec_servo;
+#endif
+
 #if FRAME_CONFIG ==     HELI_COMPOUND_FRAME
     // Heli
     RC_Channel      heli_servo_1, heli_servo_2, heli_servo_3;                   // servos for swash plate
@@ -535,6 +541,11 @@ public:
         heli_servo_4        (CH_4),
         heli_servo_5        (CH_5),
         heli_servo_6        (CH_6),
+#endif
+
+// TODO: Enable this for HELI_TILTROTOR_FRAME only.
+#if FRAME_CONFIG ==     HELI_DUAL_FRAME
+        tvec_servo          (CH_7),
 #endif
 
 #if FRAME_CONFIG ==     HELI_COMPOUND_FRAME

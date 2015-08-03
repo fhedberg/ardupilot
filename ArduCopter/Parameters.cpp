@@ -529,6 +529,13 @@ const AP_Param::Info Copter::var_info[] PROGMEM = {
     GGROUP(heli_servo_6,    "HS6_", RC_Channel),
 #endif
 
+// TODO: Enable this for HELI_TILTROTOR_FRAME only
+#if FRAME_CONFIG == HELI_DUAL_FRAME
+    // @Group: HS6_
+    // @Path: ../libraries/RC_Channel/RC_Channel.cpp
+    GGROUP(tvec_servo,      "TVS_", RC_Channel),
+#endif
+
     // @Param: H_STAB_COL_MIN
     // @DisplayName: Heli Stabilize Throttle Collective Minimum
     // @Description: Helicopter's minimum collective position while pilot directly controls collective in stabilize mode
@@ -995,8 +1002,8 @@ const AP_Param::Info Copter::var_info[] PROGMEM = {
 
 #elif FRAME_CONFIG == HELI_DUAL_FRAME
     // @Group: H_
-    // @Path: ../libraries/AP_Motors/AP_MotorsHeli_Dual.cpp
-    GOBJECT(motors, "H_",           AP_MotorsHeli_Dual),
+    // @Path: ../libraries/AP_Motors/AP_MotorsHeli_Tiltrotor.cpp
+    GOBJECT(motors, "H_",           AP_MotorsHeli_Tiltrotor),
 
 #elif FRAME_CONFIG == HELI_COMPOUND_FRAME
     // @Path: ../libraries/AP_Motors/AP_MotorsHeli_Compound.cpp

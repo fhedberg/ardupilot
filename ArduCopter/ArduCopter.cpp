@@ -309,6 +309,11 @@ void Copter::throttle_loop()
     // update trad heli swash plate movement
     heli_update_landing_swash();
 #endif
+
+#if FRAME_CONFIG == HELI_DUAL_FRAME
+    // update the tiltrotor trustvector angle
+    heli_update_tiltrotor_tvec_angle();
+#endif
 }
 
 // update_mount - update camera mount position
