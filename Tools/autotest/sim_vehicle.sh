@@ -253,20 +253,18 @@ case $FRAME in
 	BUILD_TARGET="sitl-octa"
         MODEL="$FRAME"
 	;;
-    heli*)
+    heli)
 	BUILD_TARGET="sitl-heli"
         MODEL="$FRAME"
 	;;
     heli-dual)
-  BUILD_TARGET="sitl-heli-dual"
-        EXTRA_SIM="$EXTRA_SIM --frame=heli-dual"
-        MODEL="heli-dual"
-  ;;
+	BUILD_TARGET="sitl-heli-dual"
+        MODEL="$FRAME"
+	;;
     heli-compound)
-  BUILD_TARGET="sitl-heli-compound"
-        EXTRA_SIM="$EXTRA_SIM --frame=heli-compound"
-        MODEL="heli-compound"
-  ;;
+	BUILD_TARGET="sitl-heli-compound"
+        MODEL="$FRAME"
+	;;
     IrisRos)
 	BUILD_TARGET="sitl"
 	;;
