@@ -16,6 +16,7 @@
 
 #include "AP_RPM.h"
 #include "RPM_PX4_PWM.h"
+#include "RPM_I2C.h"
 #include "RPM_SITL.h"
 
 extern const AP_HAL::HAL& hal;
@@ -25,7 +26,7 @@ const AP_Param::GroupInfo AP_RPM::var_info[] = {
     // @Param: _TYPE
     // @DisplayName: RPM type
     // @Description: What type of RPM sensor is connected
-    // @Values: 0:None,1:PX4-PWM
+    // @Values: 0:None,1:PX4-PWM,2:I2C
     AP_GROUPINFO("_TYPE",    0, AP_RPM, _type[0], 0),
 
     // @Param: _SCALING
@@ -56,7 +57,7 @@ const AP_Param::GroupInfo AP_RPM::var_info[] = {
     // @Param: 2_TYPE
     // @DisplayName: Second RPM type
     // @Description: What type of RPM sensor is connected
-    // @Values: 0:None,1:PX4-PWM
+    // @Values: 0:None,1:PX4-PWM,2:I2C
     AP_GROUPINFO("2_TYPE",    10, AP_RPM, _type[1], 0),
 
     // @Param: 2_SCALING
@@ -89,17 +90,19 @@ void AP_RPM::init(void)
         return;
     }
     for (uint8_t i=0; i<RPM_MAX_INSTANCES; i++) {
-#if CONFIG_HAL_BOARD == HAL_BOARD_PX4  || CONFIG_HAL_BOARD == HAL_BOARD_VRBRAIN
         uint8_t type = _type[num_instances];
         uint8_t instance = num_instances;
-
+#if CONFIG_HAL_BOARD == HAL_BOARD_PX4  || CONFIG_HAL_BOARD == HAL_BOARD_VRBRAIN
         if (type == RPM_TYPE_PX4_PWM) {
             state[instance].instance = instance;
             drivers[instance] = new AP_RPM_PX4_PWM(*this, instance, state[instance]);
         }
 #endif
+        if (type == RPM_TYPE_I2C) {
+            state[instance].instance = instance;
+            drivers[instance] = new AP_RPM_I2C(*this, instance, state[instance]);
+        }
 #if CONFIG_HAL_BOARD == HAL_BOARD_SITL
-        uint8_t instance = num_instances;
         state[instance].instance = instance;
         drivers[instance] = new AP_RPM_SITL(*this, instance, state[instance]);
 #endif

@@ -37,7 +37,8 @@ public:
     // RPM driver types
     enum RPM_Type {
         RPM_TYPE_NONE    = 0,
-        RPM_TYPE_PX4_PWM = 1
+        RPM_TYPE_PX4_PWM = 1,
+        RPM_TYPE_I2C = 2
     };
 
     // The RPM_State structure is filled in by the backend driver
