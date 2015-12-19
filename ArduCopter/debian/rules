@@ -1,0 +1,21 @@
+#!/usr/bin/make -f
+
+include ../mk/debian.mk
+
+binary-install/arducopter-sitl ::
+	$(call arducopter_template,sitl)
+
+binary-install/arducopter-pxf ::
+	$(call arducopter_template,pxf)
+
+binary-install/arducopter-navio ::
+	$(call arducopter_template,navio)
+
+binary-install/arducopter-raspilot ::
+	$(call arducopter_template,raspilot)
+
+binary-install/arducopter-bbbmini ::
+	$(call arducopter_template,bbbmini)
+
+binary-install/arducopter-minlure ::
+	$(call arducopter_template,minlure)

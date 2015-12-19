@@ -1,0 +1,46 @@
+Source: arduplane
+Maintainer: Fredrik Hedberg <fredrik.hedberg@jhma.se>
+Section: misc
+Priority: optional
+Standards-Version: 3.9.2
+
+Package: arduplane-sitl
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: ArduPlane for SITL simulation
+
+Package: arduplane-navio
+Architecture: armhf
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Provides: arduplane
+Description: ArduPlane for Raspberry Pi 2 with Navio+
+
+Package: arduplane-erlebrain2
+Architecture: armhf
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Provides: arduplane
+Description: ArduPlane for Raspberry Pi 2 with ErleBrain2
+
+Package: arduplane-raspilot
+Architecture: armhf
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Provides: arduplane
+Description: ArduPlane for Raspberry Pi 2 with Raspilot
+
+Package: arduplane-pxf
+Architecture: armhf
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Provides: arduplane
+Description: ArduPlane for BeagleBoneBlack with PXF
+
+Package: arduplane-bbbmini
+Architecture: armhf
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Provides: arduplane
+Description: ArduPlane for BeagleBoneBlack with BBBMINI
+
+Package: arduplane-minlure
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Provides: arduplane
+Description: ArduPlane for Minnowboard MAX with DroneLure

@@ -1,0 +1,21 @@
+#!/usr/bin/make -f
+
+include ../mk/debian.mk
+
+binary-install/arduplane-sitl ::
+	$(call arduplane_template,sitl)
+
+binary-install/arduplane-pxf ::
+	$(call arduplane_template,pxf)
+
+binary-install/arduplane-navio ::
+	$(call arduplane_template,navio)
+
+binary-install/arduplane-raspilot ::
+	$(call arduplane_template,raspilot)
+
+binary-install/arduplane-bbbmini ::
+	$(call arduplane_template,bbbmini)
+
+binary-install/arduplane-minlure ::
+	$(call arduplane_template,minlure)

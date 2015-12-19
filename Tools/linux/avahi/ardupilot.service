@@ -1,0 +1,11 @@
+<service-group>
+  <name replace-wildcards="yes">ArduPilot on %h</name>
+  <service>
+    <type>_mavlink._tcp</type>
+    <port>5670</port>
+  </service>
+  <service>
+    <type>_mavlink._udp</type>
+    <port>14550</port>
+  </service>
+</service-group>

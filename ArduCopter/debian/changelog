@@ -1,0 +1,11 @@
+arducopter (3.3.2-1) stable; urgency=medium
+
+  * Updated to ArduCopter 3.3.2.
+
+ -- Fredrik Hedberg <fredrik.hedberg@jhma.se>  Mon, 4 Jan 2016 20:15:25 +0100
+
+arducopter (3.3.2-rc1) stable; urgency=medium
+
+  * Initial release based on ArduCopter 3.3.2-rc1.
+
+ -- Fredrik Hedberg <fredrik.hedberg@jhma.se>  Sat, 19 Dec 2015 00:15:24 +0100

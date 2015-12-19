@@ -1,0 +1,46 @@
+Source: arducopter
+Maintainer: Fredrik Hedberg <fredrik.hedberg@jhma.se>
+Section: misc
+Priority: optional
+Standards-Version: 3.9.2
+
+Package: arducopter-sitl
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: ArduCopter for SITL simulation
+
+Package: arducopter-navio
+Architecture: armhf
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Provides: arducopter
+Description: ArduCopter for Raspberry Pi 2 with Navio+
+
+Package: arducopter-erlebrain2
+Architecture: armhf
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Provides: arducopter
+Description: ArduCopter for Raspberry Pi 2 with ErleBrain2
+
+Package: arducopter-raspilot
+Architecture: armhf
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Provides: arducopter
+Description: ArduCopter for Raspberry Pi 2 with Raspilot
+
+Package: arducopter-pxf
+Architecture: armhf
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Provides: arducopter
+Description: ArduCopter for BeagleBoneBlack with PXF
+
+Package: arducopter-bbbmini
+Architecture: armhf
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Provides: arducopter
+Description: ArduCopter for BeagleBoneBlack with BBBMINI
+
+Package: arducopter-minlure
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Provides: arducopter
+Description: ArduCopter for Minnowboard MAX with DroneLure

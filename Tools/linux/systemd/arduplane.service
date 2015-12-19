@@ -1,0 +1,8 @@
+[Unit]
+Description=ArduCopter
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+EnvironmentFile=/etc/defaults/arduplane
+ExecStart=/usr/bin/arduplane

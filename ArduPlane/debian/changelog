@@ -1,0 +1,5 @@
+arduplane (3.4.0-1) stable; urgency=medium
+
+  * Initial release based on ArduPlane 3.4.0.
+
+ -- Fredrik Hedberg <fredrik.hedberg@jhma.se>  Mon, 4 Jan 2016 20:15:25 +0100
