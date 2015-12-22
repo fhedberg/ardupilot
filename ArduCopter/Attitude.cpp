@@ -225,7 +225,7 @@ float Copter::get_throttle_pre_takeoff(float input_thr)
     float in_min = g.throttle_min;
     float in_max = get_takeoff_trigger_throttle();
 
-#if FRAME_CONFIG == HELI_FRAME || FRAME_CONFIG == HELI_DUAL_FRAME || FRAME_CONFIG == HELI_COMPOUND_FRAME
+#if FRAME_TYPE == HELICOPTER
     // helicopters swash will move from bottom to 1/2 of mid throttle
     float out_min = 0;
 #else

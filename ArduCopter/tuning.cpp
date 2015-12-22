@@ -112,7 +112,7 @@ void Copter::tuning() {
         break;
 #endif
 
-#if FRAME_CONFIG == HELI_FRAME || FRAME_CONFIG == HELI_DUAL_FRAME || FRAME_CONFIG == HELI_COMPOUND_FRAME
+#if FRAME_TYPE == HELICOPTER
     case TUNING_RATE_PITCH_FF:
         g.pid_rate_pitch.ff(tuning_value);
         break;
@@ -201,7 +201,7 @@ void Copter::tuning() {
         g.pid_rate_roll.kD(tuning_value);
         break;
 
-#if FRAME_CONFIG != HELI_FRAME && FRAME_CONFIG != HELI_DUAL_FRAME && FRAME_CONFIG != HELI_COMPOUND_FRAME
+#if FRAME_TYPE == MULTICOPTER
     case TUNING_RATE_MOT_YAW_HEADROOM:
         motors.set_yaw_headroom(tuning_value*1000);
         break;
