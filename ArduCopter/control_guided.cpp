@@ -252,7 +252,7 @@ void Copter::guided_takeoff_run()
 {
     // if not auto armed or motors not enabled set throttle to zero and exit immediately
     if (!ap.auto_armed || !motors.get_interlock()) {
-#if FRAME_CONFIG == HELI_FRAME || FRAME_CONFIG == HELI_DUAL_FRAME || FRAME_CONFIG == HELI_COMPOUND_FRAME
+#if FRAME_TYPE == HELICOPTER
         // Helicopters always stabilize roll/pitch/yaw
         // call attitude controller
         attitude_control.input_euler_angle_roll_pitch_euler_rate_yaw_smooth(0, 0, 0, get_smoothing_gain());

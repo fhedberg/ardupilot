@@ -331,7 +331,7 @@ void NOINLINE Copter::send_servo_out(mavlink_channel_t chan)
     // normalized values scaled to -10000 to 10000
     // This is used for HIL.  Do not change without discussing with HIL maintainers
 
-#if FRAME_CONFIG == HELI_FRAME || FRAME_CONFIG == HELI_DUAL_FRAME || FRAME_CONFIG == HELI_COMPOUND_FRAME
+#if FRAME_TYPE == HELICOPTER
     mavlink_msg_rc_channels_scaled_send(
         chan,
         millis(),

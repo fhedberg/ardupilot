@@ -122,7 +122,7 @@ Copter::Copter(void) :
 #if PRECISION_LANDING == ENABLED
     precland(ahrs, inertial_nav, g.pi_precland, MAIN_LOOP_SECONDS),
 #endif
-#if FRAME_CONFIG == HELI_FRAME || FRAME_CONFIG == HELI_DUAL_FRAME || FRAME_CONFIG == HELI_COMPOUND_FRAME
+#if FRAME_TYPE == HELICOPTER
     // ToDo: Input Manager is only used by Heli for 3.3, but will be used by all frames for 3.4
     input_manager(MAIN_LOOP_RATE),
 #endif

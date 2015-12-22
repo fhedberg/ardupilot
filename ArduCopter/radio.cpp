@@ -57,7 +57,7 @@ void Copter::init_rc_out()
     motors.set_update_rate(g.rc_speed);
     motors.set_frame_orientation(g.frame_orientation);
     motors.Init();                                              // motor initialisation
-#if FRAME_CONFIG != HELI_FRAME && FRAME_CONFIG != HELI_DUAL_FRAME && FRAME_CONFIG != HELI_COMPOUND_FRAME
+#if FRAME_TYPE == MULTICOPTER
     motors.set_throttle_range(g.throttle_min, channel_throttle->radio_min, channel_throttle->radio_max);
     motors.set_hover_throttle(g.throttle_mid);
 #endif

@@ -82,7 +82,7 @@ void Copter::auto_disarm_check()
         return;
     }
 
-#if FRAME_CONFIG == HELI_FRAME || FRAME_CONFIG == HELI_DUAL_FRAME || FRAME_CONFIG == HELI_COMPOUND_FRAME
+#if FRAME_TYPE == HELICOPTER
     // if the rotor is still spinning, don't initiate auto disarm
     if (motors.rotor_speed_above_critical()) {
         auto_disarm_begin = tnow_ms;
@@ -92,7 +92,7 @@ void Copter::auto_disarm_check()
 
     // always allow auto disarm if using interlock switch or motors are Emergency Stopped
     if ((ap.using_interlock && !motors.get_interlock()) || ap.motor_emergency_stop) {
-#if FRAME_CONFIG != HELI_FRAME && FRAME_CONFIG != HELI_DUAL_FRAME && FRAME_CONFIG != HELI_COMPOUND_FRAME
+#if FRAME_TYPE == MULTICOPTER
         // use a shorter delay if using throttle interlock switch or Emergency Stop, because it is less
         // obvious the copter is armed as the motors will not be spinning
         disarm_delay_ms /= 2;
@@ -490,7 +490,7 @@ bool Copter::pre_arm_checks(bool display_failure)
             return false;
         }
 #endif
-#if FRAME_CONFIG == HELI_FRAME || FRAME_CONFIG == HELI_DUAL_FRAME || FRAME_CONFIG == HELI_COMPOUND_FRAME
+#if FRAME_TYPE == HELICOPTER
         // check helicopter parameters
         if (!motors.parameter_check(display_failure)) {
             return false;
@@ -503,7 +503,7 @@ bool Copter::pre_arm_checks(bool display_failure)
     if ((g.arming_check == ARMING_CHECK_ALL) || (g.arming_check & ARMING_CHECK_RC)) {
         if (g.failsafe_throttle != FS_THR_DISABLED && channel_throttle->radio_in < g.failsafe_throttle_value) {
             if (display_failure) {
-    #if FRAME_CONFIG == HELI_FRAME || FRAME_CONFIG == HELI_DUAL_FRAME || FRAME_CONFIG == HELI_COMPOUND_FRAME
+    #if FRAME_TYPE == HELICOPTER
                 gcs_send_text(MAV_SEVERITY_CRITICAL,"PreArm: Collective below Failsafe");
     #else
                 gcs_send_text(MAV_SEVERITY_CRITICAL,"PreArm: Throttle below Failsafe");
@@ -791,7 +791,7 @@ bool Copter::arm_checks(bool display_failure, bool arming_from_gcs)
         // check throttle is not too low - must be above failsafe throttle
         if (g.failsafe_throttle != FS_THR_DISABLED && channel_throttle->radio_in < g.failsafe_throttle_value) {
             if (display_failure) {
-#if FRAME_CONFIG == HELI_FRAME || FRAME_CONFIG == HELI_DUAL_FRAME || FRAME_CONFIG == HELI_COMPOUND_FRAME
+#if FRAME_TYPE == HELICOPTER
                 gcs_send_text(MAV_SEVERITY_CRITICAL,"Arm: Collective below Failsafe");
 #else
                 gcs_send_text(MAV_SEVERITY_CRITICAL,"Arm: Throttle below Failsafe");
@@ -805,7 +805,7 @@ bool Copter::arm_checks(bool display_failure, bool arming_from_gcs)
             // above top of deadband is too always high
             if (channel_throttle->control_in > get_takeoff_trigger_throttle()) {
                 if (display_failure) {
-#if FRAME_CONFIG == HELI_FRAME || FRAME_CONFIG == HELI_DUAL_FRAME || FRAME_CONFIG == HELI_COMPOUND_FRAME
+#if FRAME_TYPE == HELICOPTER
                     gcs_send_text(MAV_SEVERITY_CRITICAL,"Arm: Collective too high");
 #else
                     gcs_send_text(MAV_SEVERITY_CRITICAL,"Arm: Throttle too high");
@@ -816,7 +816,7 @@ bool Copter::arm_checks(bool display_failure, bool arming_from_gcs)
             // in manual modes throttle must be at zero
             if ((mode_has_manual_throttle(control_mode) || control_mode == DRIFT) && channel_throttle->control_in > 0) {
                 if (display_failure) {
-#if FRAME_CONFIG == HELI_FRAME || FRAME_CONFIG == HELI_DUAL_FRAME || FRAME_CONFIG == HELI_COMPOUND_FRAME
+#if FRAME_TYPE == HELICOPTER
                     gcs_send_text(MAV_SEVERITY_CRITICAL,"Arm: Collective too high");
 #else
                     gcs_send_text(MAV_SEVERITY_CRITICAL,"Arm: Throttle too high");

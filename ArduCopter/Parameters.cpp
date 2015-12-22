@@ -681,7 +681,7 @@ const AP_Param::Info Copter::var_info[] = {
     // @Range: 0.001 0.02
     // @Increment: 0.001
     // @User: Standard
-#if FRAME_CONFIG == HELI_FRAME || FRAME_CONFIG == HELI_DUAL_FRAME || FRAME_CONFIG == HELI_COMPOUND_FRAME
+#if FRAME_TYPE == HELICOPTER
     GGROUP(pid_rate_roll,     "RATE_RLL_", AC_HELI_PID),
 #else
     GGROUP(pid_rate_roll,     "RATE_RLL_", AC_PID),
@@ -715,7 +715,7 @@ const AP_Param::Info Copter::var_info[] = {
     // @Range: 0.001 0.02
     // @Increment: 0.001
     // @User: Standard
-#if FRAME_CONFIG == HELI_FRAME || FRAME_CONFIG == HELI_DUAL_FRAME || FRAME_CONFIG == HELI_COMPOUND_FRAME
+#if FRAME_TYPE == HELICOPTER
     GGROUP(pid_rate_pitch,    "RATE_PIT_", AC_HELI_PID),
 #else
     GGROUP(pid_rate_pitch,    "RATE_PIT_", AC_PID),
@@ -749,7 +749,7 @@ const AP_Param::Info Copter::var_info[] = {
     // @Range: 0.000 0.02
     // @Increment: 0.001
     // @User: Standard
-#if FRAME_CONFIG == HELI_FRAME || FRAME_CONFIG == HELI_DUAL_FRAME || FRAME_CONFIG == HELI_COMPOUND_FRAME
+#if FRAME_TYPE == HELICOPTER
     GGROUP(pid_rate_yaw,      "RATE_YAW_", AC_HELI_PID),
 #else
     GGROUP(pid_rate_yaw,      "RATE_YAW_", AC_PID),
@@ -905,7 +905,7 @@ const AP_Param::Info Copter::var_info[] = {
     // @Path: ../libraries/AP_LandingGear/AP_LandingGear.cpp
     GOBJECT(landinggear,    "LGR_", AP_LandingGear),
 
-#if FRAME_CONFIG == HELI_FRAME || FRAME_CONFIG == HELI_DUAL_FRAME || FRAME_CONFIG == HELI_COMPOUND_FRAME
+#if FRAME_TYPE == HELICOPTER
     // @Group: IM_
     // @Path: ../libraries/AC_InputManager/AC_InputManager_Heli.cpp
     GOBJECT(input_manager, "IM_", AC_InputManager_Heli),
