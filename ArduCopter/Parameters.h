@@ -464,10 +464,10 @@ public:
 #endif
 
     // RC channels
-    RC_Channel              rc_1;
-    RC_Channel              rc_2;
-    RC_Channel              rc_3;
-    RC_Channel              rc_4;
+    RC_Channel_aux          rc_1;
+    RC_Channel_aux          rc_2;
+    RC_Channel_aux          rc_3;
+    RC_Channel_aux          rc_4;
     RC_Channel_aux          rc_5;
     RC_Channel_aux          rc_6;
     RC_Channel_aux          rc_7;
