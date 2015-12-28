@@ -25,11 +25,11 @@ enum RotorControlMode {
 
 class AP_MotorsHeli_RSC {
 public:
-        AP_MotorsHeli_RSC(RC_Channel&   servo_output,
-                      int8_t        servo_output_channel,
-                      uint16_t      loop_rate) :
+        AP_MotorsHeli_RSC(RC_Channel&                           servo_output,
+                          RC_Channel_aux::Aux_servo_function_t  servo_output_function,
+                          uint16_t                              loop_rate) :
         _servo_output(servo_output),
-        _servo_output_channel(servo_output_channel),
+        _servo_output_function(servo_output_function),
         _loop_rate(loop_rate)
     {};
 
@@ -84,9 +84,9 @@ public:
 private:
 
     // external variables
-    RC_Channel&     _servo_output;
-    int8_t          _servo_output_channel;      // output channel to rotor esc
-    float           _loop_rate;                 // main loop rate
+    RC_Channel&                             _servo_output;
+    RC_Channel_aux::Aux_servo_function_t    _servo_output_function; // output channel to rotor esc
+    float                                   _loop_rate;             // main loop rate
 
     // internal variables
     RotorControlMode _control_mode = ROTOR_CONTROL_MODE_DISABLED;   // motor control mode, Passthrough or Setpoint

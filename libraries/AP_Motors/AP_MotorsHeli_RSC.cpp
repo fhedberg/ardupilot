@@ -19,8 +19,6 @@
 
 #include "AP_MotorsHeli_RSC.h"
 
-extern const AP_HAL::HAL& hal;
-
 // init_servo - servo initialization on start-up
 void AP_MotorsHeli_RSC::init_servo()
 {
@@ -173,6 +171,6 @@ void AP_MotorsHeli_RSC::write_rsc(int16_t servo_out)
         _servo_output.servo_out = servo_out;
         _servo_output.calc_pwm();
 
-        hal.rcout->write(_servo_output_channel, _servo_output.radio_out);
+        RC_Channel_aux::set_radio(_servo_output_function, _servo_output.radio_out);
     }
 }
