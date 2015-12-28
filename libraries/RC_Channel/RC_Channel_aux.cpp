@@ -20,7 +20,7 @@ const AP_Param::GroupInfo RC_Channel_aux::var_info[] = {
 };
 
 RC_Channel_aux *RC_Channel_aux::_aux_channels[RC_AUX_MAX_CHANNELS];
-uint32_t RC_Channel_aux::_function_mask;
+uint64_t RC_Channel_aux::_function_mask;
 
 /// map a function to a servo channel and output it
 void
@@ -339,9 +339,25 @@ bool
 RC_Channel_aux::function_assigned(RC_Channel_aux::Aux_servo_function_t function)
 {
     if (function < k_nr_aux_servo_functions) {
-        return (_function_mask & (1UL<<function)) != 0;
+        return (_function_mask & (1ULL<<function)) != 0;
     }
 	return false;
+}
+
+/*
+  return a channel mask of all channels assigned by a function mask
+ */
+uint32_t RC_Channel_aux::function_channel_mask(uint64_t function_mask)
+{
+    uint32_t function_channel_mask = 0;
+
+    for (uint8_t i = 0; i < RC_AUX_MAX_CHANNELS; i++) {
+        if (_aux_channels[i] && (function_mask & (1ULL << _aux_channels[i]->function.get())) != 0) {
+            function_channel_mask |= (1UL << i);
+        }
+    }
+
+    return function_channel_mask;
 }
 
 /*

@@ -10,7 +10,7 @@
 #include <AP_HAL/AP_HAL.h>
 #include "RC_Channel.h"
 
-#define RC_AUX_MAX_CHANNELS 12
+#define RC_AUX_MAX_CHANNELS 16
 
 /// @class	RC_Channel_aux
 /// @brief	Object managing one aux. RC channel (CH5-8), with information about its function
@@ -66,6 +66,17 @@ public:
         k_epm                   = 28,            ///< epm gripper
         k_landing_gear_control  = 29,            ///< landing gear controller
         k_engine_run_enable     = 30,            ///< engine kill switch, used for gas airplanes and helicopters
+        k_heli_swash_servo_1    = 31,
+        k_heli_swash_servo_2    = 32,
+        k_heli_swash_servo_3    = 33,
+        k_heli_swash_servo_4    = 34,
+        k_heli_swash_servo_5    = 35,
+        k_heli_swash_servo_6    = 36,
+        k_heli_yaw_servo_1      = 37,
+        k_heli_yaw_servo_2      = 38,
+        k_heli_rsc_1            = 39,
+        k_heli_rsc_2            = 40,
+        k_heli_aux              = 41,
         k_nr_aux_servo_functions         ///< This must be the last enum value (only add new values _before_ this one)
     } Aux_servo_function_t;
 
@@ -110,6 +121,9 @@ public:
 	// return true if a function is assigned to a channel
 	static bool function_assigned(Aux_servo_function_t function);
 
+    // return a channel mask of all channels assigned by a function
+    static uint32_t function_channel_mask(uint64_t function_mask);
+
 	// set a servo_out value, and angle range, then calc_pwm
 	static void move_servo(Aux_servo_function_t function,
 						   int16_t value, int16_t angle_min, int16_t angle_max);
@@ -129,7 +143,7 @@ public:
     static void update_aux_servo_function(void);
 
 private:
-    static uint32_t _function_mask;
+    static uint64_t _function_mask;
     static RC_Channel_aux *_aux_channels[RC_AUX_MAX_CHANNELS];
 };
 
