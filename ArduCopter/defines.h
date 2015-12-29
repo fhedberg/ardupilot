@@ -81,6 +81,7 @@ enum aux_sw_func {
 #define COAX_FRAME 9
 #define HELI_DUAL_FRAME 10
 #define HELI_COMPOUND_FRAME 11
+#define HELI_TILTROTOR_FRAME 12
 
 // Frame types
 

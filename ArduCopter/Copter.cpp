@@ -35,6 +35,8 @@ Copter::Copter(void) :
     motors(g.heli_servo_rsc, g.heli_servo_1, g.heli_servo_2, g.heli_servo_3, g.heli_servo_4, g.heli_servo_5, g.heli_servo_6, MAIN_LOOP_RATE),
 #elif FRAME_CONFIG == HELI_COMPOUND_FRAME  // compound helicopter constructor requires more arguments
     motors(g.rc_6, g.rc_7, g.heli_servo_rsc, g.heli_servo_1, g.heli_servo_2, g.heli_servo_3, g.heli_servo_4, g.heli_servo_5, MAIN_LOOP_RATE),
+#elif FRAME_CONFIG == HELI_TILTROTOR_FRAME  // tiltrotor helicopter constructor requires more arguments
+    motors(g.heli_servo_rsc, g.heli_servo_1, g.heli_servo_2, g.heli_servo_3, g.heli_servo_4, g.heli_servo_5, g.heli_servo_6, g.heli_servo_tvec, MAIN_LOOP_RATE),
 #elif FRAME_CONFIG == TRI_FRAME  // tri constructor requires additional rc_7 argument to allow tail servo reversing
     motors(MAIN_LOOP_RATE),
 #elif FRAME_CONFIG == SINGLE_FRAME  // single constructor requires extra servos for flaps

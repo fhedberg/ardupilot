@@ -181,6 +181,7 @@ public:
         k_param_motors = 90,
         k_param_disarm_delay,
         k_param_fs_crash_check,
+        k_param_heli_servo_tvec,
 
         // 97: RSSI
         k_param_rssi = 97,
@@ -470,6 +471,14 @@ public:
     RC_Channel      heli_servo_rsc;                                             // servo for rotor speed control output
 #endif
 
+#if FRAME_CONFIG ==     HELI_TILTROTOR_FRAME
+    // Heli
+    RC_Channel      heli_servo_1, heli_servo_2, heli_servo_3;                   // servos for first swash plate
+    RC_Channel      heli_servo_4, heli_servo_5, heli_servo_6;                   // servos for second swash plate
+    RC_Channel      heli_servo_rsc;                                             // servo for rotor speed control output
+    RC_Channel      heli_servo_tvec;                                            // servo for trust vector control output
+#endif
+
 #if FRAME_CONFIG ==     SINGLE_FRAME
     // Single
     RC_Channel      single_servo_1, single_servo_2, single_servo_3, single_servo_4;     // servos for four flaps
@@ -569,6 +578,17 @@ public:
         heli_servo_4        (CH_4),
         heli_servo_5        (CH_5),
         heli_servo_rsc      (CH_8),
+#endif
+
+#if FRAME_CONFIG ==     HELI_TILTROTOR_FRAME
+        heli_servo_1        (CH_1),
+        heli_servo_2        (CH_2),
+        heli_servo_3        (CH_3),
+        heli_servo_4        (CH_4),
+        heli_servo_5        (CH_5),
+        heli_servo_6        (CH_6),
+        heli_servo_rsc      (CH_8),
+        heli_servo_tvec     (CH_7),
 #endif
 
 #if FRAME_CONFIG ==     SINGLE_FRAME

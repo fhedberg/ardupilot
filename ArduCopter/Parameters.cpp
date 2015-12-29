@@ -513,7 +513,7 @@ const AP_Param::Info Copter::var_info[] = {
     GSCALAR(fs_crash_check, "FS_CRASH_CHECK",    1),
     
 
-#if FRAME_CONFIG == HELI_FRAME || FRAME_CONFIG == HELI_DUAL_FRAME || FRAME_CONFIG == HELI_COMPOUND_FRAME 
+#if FRAME_CONFIG == HELI_FRAME || FRAME_CONFIG == HELI_DUAL_FRAME || FRAME_CONFIG == HELI_COMPOUND_FRAME || FRAME_CONFIG == HELI_TILTROTOR_FRAME
     // @Group: HS1_
     // @Path: ../libraries/RC_Channel/RC_Channel.cpp
     GGROUP(heli_servo_1,    "HS1_", RC_Channel),
@@ -530,16 +530,21 @@ const AP_Param::Info Copter::var_info[] = {
     // @Path: ../libraries/RC_Channel/RC_Channel.cpp
     GGROUP(heli_servo_rsc,    "H_RSC_", RC_Channel),
 
-#if FRAME_CONFIG == HELI_DUAL_FRAME || FRAME_CONFIG == HELI_COMPOUND_FRAME
+#if FRAME_CONFIG == HELI_DUAL_FRAME || FRAME_CONFIG == HELI_COMPOUND_FRAME || FRAME_CONFIG == HELI_TILTROTOR_FRAME
     // @Group: HS5_
     // @Path: ../libraries/RC_Channel/RC_Channel.cpp
     GGROUP(heli_servo_5,    "HS5_", RC_Channel),
 #endif
 
-#if FRAME_CONFIG == HELI_DUAL_FRAME
+#if FRAME_CONFIG == HELI_DUAL_FRAME || FRAME_CONFIG == HELI_TILTROTOR_FRAME
     // @Group: HS6_
     // @Path: ../libraries/RC_Channel/RC_Channel.cpp
     GGROUP(heli_servo_6,    "HS6_", RC_Channel),
+#endif
+#if FRAME_CONFIG == HELI_TILTROTOR_FRAME
+    // @Group: H_TS_
+    // @Path: ../libraries/RC_Channel/RC_Channel.cpp
+    GGROUP(heli_servo_tvec, "H_TS_", RC_Channel),
 #endif
 #endif
 
@@ -1027,6 +1032,11 @@ const AP_Param::Info Copter::var_info[] = {
 #elif FRAME_CONFIG == HELI_COMPOUND_FRAME
     // @Path: ../libraries/AP_Motors/AP_MotorsHeli_Compound.cpp
     GOBJECT(motors, "H_",           AP_MotorsHeli_Compound),
+
+#elif FRAME_CONFIG == HELI_TILTROTOR_FRAME
+    // @Group: H_
+    // @Path: ../libraries/AP_Motors/AP_MotorsHeli_Tiltrotor.cpp
+    GOBJECT(motors, "H_",           AP_MotorsHeli_Tiltrotor),
 
 #elif FRAME_CONFIG == SINGLE_FRAME
     // @Group: SS1_

@@ -264,6 +264,11 @@ void Copter::fast_loop()
     update_heli_control_dynamics();
 #endif
 
+#if FRAME_CONFIG == HELI_TILTROTOR_FRAME
+    // update the tiltrotor trustvector angle
+    heli_update_tiltrotor_tvec_angle();
+#endif
+
     // send outputs to the motors library
     motors_output();
 
