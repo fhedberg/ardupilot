@@ -73,7 +73,7 @@ with UDP.
 
 # Logging
 
-Logs will appear in /var/APM/logs as usual for Linux ArduPilot
+Logs will appear in /var/lib/ardupilot/logs as usual for Linux ArduPilot
 ports. You can download logs over MAVLink or transfer over WiFi.
 
 # UART connections

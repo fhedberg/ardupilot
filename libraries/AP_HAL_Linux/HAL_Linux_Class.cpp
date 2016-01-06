@@ -223,11 +223,11 @@ void _usage(void)
     printf("\t                  -A tcp:11.0.0.2:5678\n");    
     printf("\t                  -A udp:11.0.0.2:5678\n");    
     printf("\t-custom log path:\n");        
-    printf("\t                  --log-directory /var/APM/logs\n");
-    printf("\t                  -l /var/APM/logs\n");
+    printf("\t                  --log-directory /var/lib/ardupilot/logs\n");
+    printf("\t                  -l /var/lib/ardupilot/logs\n");
     printf("\t-custom terrain path:\n");
-    printf("\t                   --terrain-directory /var/APM/terrain\n");
-    printf("\t                   -t /var/APM/terrain\n");
+    printf("\t                   --terrain-directory /var/lib/ardupilot/terrain\n");
+    printf("\t                   -t /var/lib/ardupilot/terrain\n");
 }
 
 void HAL_Linux::run(int argc, char* const argv[], Callbacks* callbacks) const
