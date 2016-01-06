@@ -20,7 +20,7 @@ static uint32_t last_get_storage_us;
 static uint64_t start_time;
 
 // location of virtual eeprom in Linux filesystem
-#define STORAGE_DIR "/var/APM"
+#define STORAGE_DIR "/var/lib/ardupilot"
 #define STORAGE_FILE STORAGE_DIR "/" SKETCHNAME ".stg"
 
 // time since startup in microseconds
