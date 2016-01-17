@@ -14,7 +14,7 @@ binary-install/arduplane-navio ::
 binary-install/arduplane-raspilot ::
 	$(call arduplane_template,raspilot)
 
-binary-install/arduplane-bbbmini ::
+fbinary-install/arduplane-bbbmini ::
 	$(call arduplane_template,bbbmini)
 
 binary-install/arduplane-minlure ::

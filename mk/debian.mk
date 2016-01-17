@@ -13,7 +13,14 @@ define ardupilot_template
 
 	cp ../Tools/linux/avahi/ardupilot.service debian/${1}-${2}/etc/avahi/services/${1}.service
 	cp ../Tools/linux/systemd/${1}.service debian/${1}-${2}/lib/systemd/system/${1}
-	cp ../Tools/linux/default/${1} debian/${1}-${2}/etc/defaults/${1}
+
+	DEFAULT_FILE = ../Tools/linux/default/${1}-${2}
+
+	ifeq ($(wildcard $(DEFAULT_FILE),)
+    	cp ../Tools/linux/default/${1}-{2} debian/${1}-${2}/etc/defaults/${1}
+	else
+		cp ../Tools/linux/default/${1} debian/${1}-${2}/etc/defaults/${1}
+	endif
 endef
 
 define arducopter_template
