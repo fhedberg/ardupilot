@@ -116,6 +116,22 @@ const AP_Param::GroupInfo AP_MotorsHeli_Single::var_info[] = {
     // @User: Standard
     AP_GROUPINFO("GYR_GAIN_ACRO", 11, AP_MotorsHeli_Single,  _ext_gyro_gain_acro, 0),
     
+    // @Group: SV1_
+    // @Path: ../RC_Channel/RC_Channel.cpp
+    AP_SUBGROUPINFO(_swash_servo_1, "SW1_", 12, AP_MotorsHeli_Single, RC_Channel),
+
+    // @Group: SV2_
+    // @Path: ../RC_Channel/RC_Channel.cpp
+    AP_SUBGROUPINFO(_swash_servo_2, "SW2_", 13, AP_MotorsHeli_Single, RC_Channel),
+
+    // @Group: SV3_
+    // @Path: ../RC_Channel/RC_Channel.cpp
+    AP_SUBGROUPINFO(_swash_servo_3, "SW3_", 14, AP_MotorsHeli_Single, RC_Channel),
+
+    // @Group: SV4_
+    // @Path: ../RC_Channel/RC_Channel.cpp
+    AP_SUBGROUPINFO(_yaw_servo, "YAW_", 15, AP_MotorsHeli_Single, RC_Channel),
+
     AP_GROUPEND
 };
 
