@@ -44,11 +44,10 @@
 class AP_MotorsHeli_Single : public AP_MotorsHeli {
 public:
     // constructor
-    AP_MotorsHeli_Single(RC_Channel&    servo_aux,
-                         uint16_t       loop_rate,
+    AP_MotorsHeli_Single(uint16_t       loop_rate,
                          uint16_t       speed_hz = AP_MOTORS_HELI_SPEED_DEFAULT) :
         AP_MotorsHeli(loop_rate, speed_hz),
-        _servo_aux(servo_aux),
+        _servo_aux(CH_7),
         _main_rotor(RC_Channel_aux::k_heli_rsc, AP_MOTORS_HELI_SINGLE_RSC, loop_rate),
         _tail_rotor(RC_Channel_aux::k_heli_tail_rsc, AP_MOTORS_HELI_SINGLE_AUX, loop_rate),
         _swash_servo_1(CH_NONE), _swash_servo_2(CH_NONE), _swash_servo_3(CH_NONE), _yaw_servo(CH_NONE)
@@ -131,7 +130,7 @@ protected:
     void servo_test();
 
     // external objects we depend upon
-    RC_Channel&     _servo_aux;                 // output to ext gyro gain and tail direct drive esc (ch7)
+    RC_Channel          _servo_aux;             // output to ext gyro gain and tail direct drive esc (ch7)
     AP_MotorsHeli_RSC   _main_rotor;            // main rotor
     AP_MotorsHeli_RSC   _tail_rotor;            // tail rotor
 
