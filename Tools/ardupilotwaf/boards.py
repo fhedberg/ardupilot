@@ -275,6 +275,14 @@ class navio(linux):
             CONFIG_HAL_BOARD_SUBTYPE = 'HAL_BOARD_SUBTYPE_LINUX_NAVIO',
         )
 
+class navioup(linux):
+    def configure_env(self, cfg, env):
+        super(navioup, self).configure_env(cfg, env)
+
+        env.DEFINES.update(
+            CONFIG_HAL_BOARD_SUBTYPE = 'HAL_BOARD_SUBTYPE_LINUX_NAVIO_UP',
+        )
+
 class navio2(linux):
     toolchain = 'arm-linux-gnueabihf'
 
