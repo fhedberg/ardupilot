@@ -48,6 +48,7 @@
 #include "UARTDriver.h"
 #include "Util.h"
 #include "Util_RPI.h"
+#include "CAN_SocketCAN.h"
 
 using namespace Linux;
 
@@ -275,7 +276,7 @@ void _usage(void)
 void HAL_Linux::run(int argc, char* const argv[], Callbacks* callbacks) const
 {
     const char *module_path = AP_MODULE_DEFAULT_DIRECTORY;
-    
+
     assert(callbacks);
 
     int opt;
