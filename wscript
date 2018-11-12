@@ -76,7 +76,7 @@ def options(opt):
         action='store_true',
         default=False,
         help='use old NuttX IO firmware for IOMCU')
-    
+
     g.add_option('--bootloader',
         action='store_true',
         default=False,
@@ -441,7 +441,7 @@ def load_pre_build(bld):
     '''allow for a pre_build() function in build modules'''
     brd = bld.get_board()
     if getattr(brd, 'pre_build', None):
-        brd.pre_build(bld)    
+        brd.pre_build(bld)
 
 def build(bld):
     config_hash = Utils.h_file(bld.bldnode.make_node('ap_config.h').abspath())
@@ -489,7 +489,7 @@ ardupilotwaf.build_command('check-all',
     doc='shortcut for `waf check --alltests`',
 )
 
-for name in ('antennatracker', 'copter', 'heli', 'plane', 'rover', 'sub', 'bootloader','iofirmware'):
+for name in ('antennatracker', 'copter', 'heli', 'plane', 'rover', 'sub', 'bootloader','iofirmware', 'node'):
     ardupilotwaf.build_command(name,
         program_group_list=name,
         doc='builds %s programs' % name,
