@@ -202,7 +202,7 @@ class Board:
             env.CXXFLAGS += [
                 '-Wno-error=cast-align',
             ]
-            
+
             env.DEFINES.update(
                 UAVCAN_CPP_VERSION = 'UAVCAN_CPP03',
                 UAVCAN_NO_ASSERTIONS = 1,
@@ -265,7 +265,7 @@ def get_boards_names():
     for h in hidden:
         if h in ret:
             ret.remove(h)
-    return ret        
+    return ret
 
 @conf
 def get_board(ctx):
@@ -281,6 +281,9 @@ def get_board(ctx):
 # be worthy to keep board definitions in files of their own.
 
 class sitl(Board):
+    def __init__(self):
+        self.with_uavcan = True
+
     def configure_env(self, cfg, env):
         super(sitl, self).configure_env(cfg, env)
 
@@ -290,7 +293,8 @@ class sitl(Board):
         )
 
         env.CXXFLAGS += [
-            '-Werror=float-equal'
+            '-Werror=float-equal',
+            '-Wno-sign-compare',
         ]
 
         if not cfg.env.DEBUG:
@@ -306,9 +310,13 @@ class sitl(Board):
 
         env.LINKFLAGS += ['-pthread',]
         env.AP_LIBRARIES += [
+            'AP_HAL_Linux',
             'AP_HAL_SITL',
             'SITL',
         ]
+
+        if self.with_uavcan:
+            cfg.define('UAVCAN_EXCEPTIONS', 0)
 
         if cfg.options.enable_sfml:
             if not cfg.check_SFML(env):
@@ -331,7 +339,7 @@ class sitl(Board):
             env.CXXFLAGS += [
                 '-fno-slp-vectorize' # compiler bug when trying to use SLP
             ]
-            
+
 class chibios(Board):
     toolchain = 'arm-none-eabi'
 
@@ -450,7 +458,7 @@ class chibios(Board):
             env.CXXFLAGS += [ '-DHAL_CHIBIOS_ENABLE_ASSERTS' ]
         else:
             cfg.msg("Enabling ChibiOS asserts", "no")
-            
+
         env.LIB += ['gcc', 'm']
 
         env.GIT_SUBMODULES += [
@@ -705,7 +713,7 @@ class rst_zynq(linux):
         env.DEFINES.update(
             CONFIG_HAL_BOARD_SUBTYPE = 'HAL_BOARD_SUBTYPE_LINUX_RST_ZYNQ',
         )
-        
+
 class px4(Board):
     abstract = True
     toolchain = 'arm-none-eabi'
@@ -869,8 +877,8 @@ class px4_v4pro(px4):
         self.board_name = 'px4fmu-v4pro'
         self.px4io_name = 'px4io-v2'
         self.romfs_exclude(['oreoled.bin'])
-        self.with_uavcan = True		
-		
+        self.with_uavcan = True
+
 class aerofc_v1(px4):
     name = 'aerofc-v1'
     def __init__(self):

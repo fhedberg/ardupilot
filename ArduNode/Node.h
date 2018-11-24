@@ -8,7 +8,6 @@
 #include <AP_Common/AP_Common.h>
 #include <AP_Param/AP_Param.h>
 #include <AP_BoardConfig/AP_BoardConfig.h>
-#include <AP_BoardConfig/AP_BoardConfig_CAN.h>
 #include <AP_SerialManager/AP_SerialManager.h>
 
 #include <AP_GPS/AP_GPS.h>
@@ -40,7 +39,6 @@ private:
   Parameters g;
   AP_Scheduler scheduler;
   AP_BoardConfig board_config;
-  AP_BoardConfig_CAN board_config_can;
   AP_SerialManager serial_manager;
 
   AP_GPS gps;
@@ -51,7 +49,6 @@ private:
 
   AP_Notify notify;
 
-  float G_Dt = 0.02f;
   NavEKF2 EKF2{&ahrs, rangefinder};
   NavEKF3 EKF3{&ahrs, rangefinder};
   AP_AHRS_NavEKF ahrs{EKF2, EKF3};

@@ -4,11 +4,11 @@
 #include <AP_Common/AP_Common.h>
 #include <AP_HAL/AP_HAL.h>
 
-#if CONFIG_HAL_BOARD == HAL_BOARD_CHIBIOS && HAL_WITH_UAVCAN
+#if HAL_WITH_UAVCAN
 
 #include <AP_HAL/CAN.h>
 #include <AP_HAL/Semaphores.h>
-#include <AP_HAL_ChibiOS/CAN.h>
+#include <AP_HAL_Linux/CAN.h>
 
 #include <AP_UAVCAN/AP_UAVCAN.h>
 
@@ -150,8 +150,8 @@ MSG_CB(uavcan::equipment::indication::LightsCommand, LightsCommand);
 void UAVCAN_sniffer::init(void)
 {
     uint8_t interface = 0;
-    AP_HAL::CANManager* can_mgr = new ChibiOS::CANManager;
-    
+    AP_HAL::CANManager* can_mgr = new Linux::CANManager;
+
     if (can_mgr == nullptr) {
         AP_HAL::panic("Couldn't allocate CANManager, something is very wrong");
     }

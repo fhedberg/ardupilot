@@ -25,7 +25,7 @@
 
 #if HAL_WITH_UAVCAN
 #include <AP_UAVCAN/AP_UAVCAN.h>
-#if CONFIG_HAL_BOARD == HAL_BOARD_LINUX
+#if CONFIG_HAL_BOARD == HAL_BOARD_LINUX || CONFIG_HAL_BOARD == HAL_BOARD_SITL
 #include <AP_HAL_Linux/CAN.h>
 #endif
 #endif
@@ -172,7 +172,7 @@ const AP_Param::GroupInfo AP_BoardConfig::var_info[] = {
 #if HAL_HAVE_IMU_HEATER
     // @Param: IMU_TARGTEMP
     // @DisplayName: Target IMU temperature
-    // @Description: This sets the target IMU temperature for boards with controllable IMU heating units. DO NOT SET -1 on The Cube. A value of -1 sets PH1 behaviour 
+    // @Description: This sets the target IMU temperature for boards with controllable IMU heating units. DO NOT SET -1 on The Cube. A value of -1 sets PH1 behaviour
     // @Range: -1 80
     // @Units: degC
     // @User: Advanced
@@ -260,7 +260,7 @@ void AP_BoardConfig::init_safety()
 }
 
 /*
-  notify user of a fatal startup error related to available sensors. 
+  notify user of a fatal startup error related to available sensors.
 */
 bool AP_BoardConfig::_in_sensor_config_error;
 

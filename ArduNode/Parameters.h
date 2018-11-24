@@ -16,7 +16,7 @@ public:
         k_param_compass,
         k_param_ins,
         k_param_serial_manager,
-        k_param_BoardConfig,
+        k_param_board_config,
     };
 
     AP_Int16 format_version;

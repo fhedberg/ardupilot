@@ -18,6 +18,12 @@
 #define HAL_GPIO_LED_ON           0
 #define HAL_GPIO_LED_OFF          1
 
+#define HAL_BOARD_CAN_IFACE_NAME "vcan0"
+#define HAL_WITH_UAVCAN 1
+#define HAL_BOARD_STORAGE_DIRECTORY "."
+#define HAL_LINUX_I2C_BUS_MASK 0
+#define HAL_LINUX_I2C_INTERNAL_BUS_MASK 0
+
 #define HAL_HAVE_BOARD_VOLTAGE 1
 #define HAL_HAVE_SAFETY_SWITCH 0
 
@@ -25,4 +31,3 @@
 #include <AP_HAL_SITL/Semaphores.h>
 #define HAL_Semaphore HALSITL::Semaphore
 #define HAL_Semaphore_Recursive HALSITL::Semaphore_Recursive
-

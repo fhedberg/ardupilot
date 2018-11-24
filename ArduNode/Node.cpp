@@ -10,6 +10,7 @@ const AP_HAL::HAL& hal = AP_HAL::get_HAL();
 
 Node::Node(void)
 {
+
 }
 
 void Node::setup()
@@ -24,12 +25,11 @@ void Node::setup()
 void Node::loop()
 {
     scheduler.loop();
-    G_Dt = scheduler.get_loop_period_s();
 }
 
 void Node::ahrs_update()
 {
-
+   hal.console->printf("ahrs\n");
 }
 
 Node node;
