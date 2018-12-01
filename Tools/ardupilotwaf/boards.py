@@ -553,6 +553,9 @@ class navio(linux):
 class navio2(linux):
     toolchain = 'arm-linux-gnueabihf'
 
+    def __init__(self):
+        self.with_uavcan = True
+
     def configure_env(self, cfg, env):
         super(navio2, self).configure_env(cfg, env)
 
